@@ -92,6 +92,7 @@ view_wport = view_wview;
 view_hport = view_hview;
 
 window_set_fullscreen(use_fullscreen);
+display_set_gui_maximise(3, 3, 0, 0);
 alarm[0] = 1;///&lt;- This just tells the window to center at the start of the next frame. If I just put window_center() here it wouldn't process it because Game Maker Problems
 </string>
           </argument>
