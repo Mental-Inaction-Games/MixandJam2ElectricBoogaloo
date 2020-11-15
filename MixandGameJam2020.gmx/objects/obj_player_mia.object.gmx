@@ -39,7 +39,12 @@ attack_timer_max = 30;
 
 player_life = 3;
 player_life_max = 3;
+can_take_damage = true;
+hurt_timer = 0;
 
+is_flashing = false;
+flashing_timer = 0;
+flash_state = 1;
 </string>
           </argument>
         </arguments>
@@ -73,6 +78,7 @@ if!(game_is_paused()){
     //finite state machine
     switch(player_state){
         case "state_walk":
+            can_take_damage = true;
             //set x and y velocity according to player inputs
             vx = (right - left) * player_speed;
             vy = (down - up) * player_speed;
@@ -93,6 +99,7 @@ if!(game_is_paused()){
             break;
             
         case "state_attack":
+            can_take_damage = true;
             if(attack_timer &gt; 0){
                 //create attack object after certain frame
                 //if((attack_timer &lt; attack_timer_max - 12)and!(instance_exists(obj_attack_player))){
@@ -110,6 +117,52 @@ if!(game_is_paused()){
                 player_state = "state_walk";
             };
             break;
+            
+        case "state_hurt":
+            can_take_damage = false;
+            is_flashing = true;
+            if(hurt_timer &gt; 0){
+                hurt_timer--;
+            }else{
+                player_state = "state_walk";
+                is_flashing = false;
+                flash_state = 1;
+                vx = 0;
+                vy = 0;
+            };
+            break;
+    };
+    
+    //taking damage
+    if((place_meeting(x, y, obj_attack_enemy))and(can_take_damage)){
+        var hurt_inst = instance_nearest(x,y,obj_attack_enemy);
+        
+        player_state = "state_hurt";
+        player_life--;
+        flashing_timer = 1;
+        hurt_timer = 20;
+        vy = lengthdir_y(2, point_direction(hurt_inst.x, hurt_inst.y, x, y))
+        vx = lengthdir_x(2, point_direction(hurt_inst.x, hurt_inst.y, x, y))
+        
+        //die
+        if(player_life &lt;= 0){
+            game_end();
+        };
+    };
+    
+    //flashing
+    ///flash timer
+    if(is_flashing){
+        if(flashing_timer &gt; 0){
+            flashing_timer--;
+        }else{
+            if(flash_state == 1){
+                flash_state = 0;
+            }else{
+                flash_state = 1;
+            };
+            flashing_timer = 8;
+        }
     };
     
     //physics
@@ -119,11 +172,6 @@ if!(game_is_paused()){
     if!(place_meeting(x, y + vy, obj_solid)){
         y += vy;
     };
-    
-    //pickup drop
-    if(place_meeting(x, y, obj_drop)){
-        instance_destroy(obj_drop);
-    }
 };
 </string>
           </argument>
@@ -270,7 +318,7 @@ for(a = 0;a &lt; player_life;a++){
 };
 
 //draw player sprite
-draw_sprite_ext(sprite_index,image_index,round(x),round(y),image_xscale,image_yscale,image_angle,image_blend,image_alpha);
+draw_sprite_ext(sprite_index,image_index,round(x),round(y),image_xscale,image_yscale,image_angle,image_blend,flash_state);
 depth = -y;
 </string>
           </argument>

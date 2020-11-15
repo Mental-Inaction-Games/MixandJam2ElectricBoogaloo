@@ -28,6 +28,12 @@
             <string>face_dir = "down";
 dust_made = false;
 
+//hide attack offscreen and store where to move it back to when it reaches the correct frame
+spawn_x = x;
+spawn_y = y;
+x = -10;
+y = -10
+
 if(instance_exists(obj_player)){
     face_dir = obj_player.face_dir;
     parent_x = obj_player.x;
@@ -68,6 +74,8 @@ if(player_inst.face_dir == "right"){
     if((player_inst.image_index &gt;= 1)and(player_inst.image_index &lt; 2)){
         draw_sprite(spr_player_pan_right,0,player_inst.x-20,player_inst.y-10);
     }else if(player_inst.image_index &gt;= 2){
+        x = spawn_x;
+        y = spawn_y;
         draw_sprite(spr_player_pan_right,1,player_inst.x+3,player_inst.y);
         if!(dust_made){
             instance_create(x-6,y,obj_fx_dust)
@@ -81,6 +89,8 @@ if(player_inst.face_dir == "right"){
     if((player_inst.image_index &gt;= 1)and(player_inst.image_index &lt; 2)){
         draw_sprite(spr_player_pan_up,0,player_inst.x-2,player_inst.y-16);
     }else if(player_inst.image_index &gt;= 2){
+        x = spawn_x;
+        y = spawn_y;
         draw_sprite(spr_player_pan_up,1,player_inst.x-2,player_inst.y-6);
         if!(dust_made){
             instance_create(x-8,y,obj_fx_dust)
@@ -94,6 +104,8 @@ if(player_inst.face_dir == "right"){
     if((player_inst.image_index &gt;= 1)and(player_inst.image_index &lt; 2)){
         draw_sprite(spr_player_pan_left,0,player_inst.x+3,player_inst.y-10);
     }else if(player_inst.image_index &gt;= 2){
+        x = spawn_x;
+        y = spawn_y;
         draw_sprite(spr_player_pan_left,1,player_inst.x-20,player_inst.y);
         if!(dust_made){
             instance_create(x-4,y,obj_fx_dust)
@@ -107,6 +119,8 @@ if(player_inst.face_dir == "right"){
     if((player_inst.image_index &gt;= 1)and(player_inst.image_index &lt; 2)){
         draw_sprite(spr_player_pan_down,0,player_inst.x,player_inst.y-10);
     }else if(player_inst.image_index &gt;= 2){
+        x = spawn_x;
+        y = spawn_y;
         draw_sprite(spr_player_pan_down,1,player_inst.x,player_inst.y+10);
         if!(dust_made){
             instance_create(x-4,y-6,obj_fx_dust)
@@ -115,6 +129,7 @@ if(player_inst.face_dir == "right"){
         };
     };
 };
+
 
 depth = -y;
 </string>
