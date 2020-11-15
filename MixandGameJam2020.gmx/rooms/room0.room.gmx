@@ -16,7 +16,7 @@
   <clearDisplayBuffer>-1</clearDisplayBuffer>
   <makerSettings>
     <isSet>-1</isSet>
-    <w>1120</w>
+    <w>1124</w>
     <h>697</h>
     <showGrid>0</showGrid>
     <showObjects>-1</showObjects>
@@ -26,7 +26,7 @@
     <showViews>0</showViews>
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>-1</deleteUnderlyingTiles>
-    <page>2</page>
+    <page>0</page>
     <xoffset>-214</xoffset>
     <yoffset>-114</yoffset>
   </makerSettings>
@@ -141,11 +141,12 @@
     <instance objName="obj_solid" x="240" y="128" name="inst_6CC6D80B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_solid" x="224" y="80" name="inst_989EF1BA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_door" x="128" y="32" name="inst_D3626692" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy_slime" x="112" y="96" name="inst_76508680" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy_tomato" x="64" y="96" name="inst_608E51E3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy_carrot" x="192" y="112" name="inst_DC701548" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy_chicken" x="160" y="128" name="inst_867E6A75" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy_noodle" x="48" y="128" name="inst_0C493E20" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy_slime" x="32" y="144" name="inst_76508680" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy_slime" x="32" y="80" name="inst_4275D848" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy_slime" x="144" y="112" name="inst_51048B5A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy_slime" x="160" y="160" name="inst_21D16342" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_honey" x="80" y="112" name="inst_4A460B08" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_honey" x="112" y="80" name="inst_8BF95F4D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="bg_tileset" x="32" y="48" w="16" h="16" xo="1" yo="35" id="10000011" name="inst_0D3D42C0" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

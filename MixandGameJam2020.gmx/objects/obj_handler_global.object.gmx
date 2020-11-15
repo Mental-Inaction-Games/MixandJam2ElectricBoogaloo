@@ -117,6 +117,14 @@ alarm[0] = 1;///&lt;- This just tells the window to center at the start of the n
           <argument>
             <kind>1</kind>
             <string>draw_text(0,0,"FPS:" + string(fps));
+if(game_is_paused()){
+    draw_set_color(c_black);
+    draw_set_alpha(0.5);
+    draw_rectangle(0,0,view_wview,view_hview,0);
+    draw_set_alpha(1);
+    draw_set_color(c_white);
+    draw_text((view_wview/2)-16,view_hview/2,"PAUSED");
+};
 </string>
           </argument>
         </arguments>
