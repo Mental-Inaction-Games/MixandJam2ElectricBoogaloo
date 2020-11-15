@@ -2,12 +2,127 @@
 <object>
   <spriteName>spr_player_attack_hitbox</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
-  <depth>0</depth>
+  <visible>-1</visible>
+  <depth>-11</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
-  <events/>
+  <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>face_dir = "down";
+dust_made = false;
+
+if(instance_exists(obj_player)){
+    face_dir = obj_player.face_dir;
+    parent_x = obj_player.x;
+    parent_y = obj_player.y;
+};
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var player_inst;
+    if(instance_exists(obj_player_mia)){
+        player_inst = obj_player_mia;
+    }else{
+        player_inst = self;
+    };
+
+//RIGHT
+if(player_inst.face_dir == "right"){
+    //draw pan sprite
+    if((player_inst.image_index &gt;= 1)and(player_inst.image_index &lt; 2)){
+        draw_sprite(spr_player_pan_right,0,player_inst.x-20,player_inst.y-10);
+    }else if(player_inst.image_index &gt;= 2){
+        draw_sprite(spr_player_pan_right,1,player_inst.x+3,player_inst.y);
+        if!(dust_made){
+            instance_create(x-6,y,obj_fx_dust)
+            instance_create(x+4,y,obj_fx_dust)
+            dust_made = true;
+        };
+    };
+//UP
+}else if(player_inst.face_dir == "up"){
+    //draw pan sprite
+    if((player_inst.image_index &gt;= 1)and(player_inst.image_index &lt; 2)){
+        draw_sprite(spr_player_pan_up,0,player_inst.x-2,player_inst.y-16);
+    }else if(player_inst.image_index &gt;= 2){
+        draw_sprite(spr_player_pan_up,1,player_inst.x-2,player_inst.y-6);
+        if!(dust_made){
+            instance_create(x-8,y,obj_fx_dust)
+            instance_create(x+4,y,obj_fx_dust)
+            dust_made = true;
+        };
+    };
+//LEFT
+}else if(player_inst.face_dir == "left"){
+    //draw pan sprite
+    if((player_inst.image_index &gt;= 1)and(player_inst.image_index &lt; 2)){
+        draw_sprite(spr_player_pan_left,0,player_inst.x+3,player_inst.y-10);
+    }else if(player_inst.image_index &gt;= 2){
+        draw_sprite(spr_player_pan_left,1,player_inst.x-20,player_inst.y);
+        if!(dust_made){
+            instance_create(x-4,y,obj_fx_dust)
+            instance_create(x+6,y,obj_fx_dust)
+            dust_made = true;
+        };
+    };
+//DOWN
+}else if(player_inst.face_dir == "down"){
+    //draw pan sprite
+    if((player_inst.image_index &gt;= 1)and(player_inst.image_index &lt; 2)){
+        draw_sprite(spr_player_pan_down,0,player_inst.x,player_inst.y-10);
+    }else if(player_inst.image_index &gt;= 2){
+        draw_sprite(spr_player_pan_down,1,player_inst.x,player_inst.y+10);
+        if!(dust_made){
+            instance_create(x-4,y-6,obj_fx_dust)
+            instance_create(x+6,y-6,obj_fx_dust)
+            dust_made = true;
+        };
+    };
+};
+
+depth = -y;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+  </events>
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>

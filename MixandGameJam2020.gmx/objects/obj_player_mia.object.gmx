@@ -91,8 +91,9 @@ if!(game_is_paused()){
         case "state_attack":
             if(attack_timer &gt; 0){
                 //create attack object after certain frame
-                if((attack_timer &lt; attack_timer_max - 12)and!(instance_exists(obj_attack_player))){
-                    instance_create(x+lengthdir_x(16,direction),y+lengthdir_y(16,direction),obj_attack_player);
+                //if((attack_timer &lt; attack_timer_max - 12)and!(instance_exists(obj_attack_player))){
+                if!(instance_exists(obj_attack_player)){
+                        instance_create(x+lengthdir_x(16,direction),y+lengthdir_y(16,direction),obj_attack_player);
                 };
                 attack_timer--;
             }else{
@@ -188,6 +189,14 @@ if!(game_is_paused()){
             if(face_dir == "right"){
                 sprite_index = spr_player_mia_attack_right;
                 direction = 0;
+                //draw pan sprite
+                /*
+                if((image_index &gt;= 1)and(image_index &lt; 2)){
+                    draw_sprite(spr_player_pan_right,0,x-20,y-10);
+                }else if(image_index &gt;= 2){
+                    draw_sprite(spr_player_pan_right,1,x+3,y);
+                };
+                */
             //UP
             }else if(face_dir == "up"){
                 sprite_index = spr_player_mia_attack_up;
@@ -197,15 +206,25 @@ if!(game_is_paused()){
                 sprite_index = spr_player_mia_attack_left;
                 direction = 180;
                 //draw pan sprite
+                /*
                 if((image_index &gt;= 1)and(image_index &lt; 2)){
-                    draw_sprite(spr_player_pan_left,0,x+3,y-9);
+                    draw_sprite(spr_player_pan_left,0,x+3,y-10);
                 }else if(image_index &gt;= 2){
-                    draw_sprite(spr_player_pan_left,1,x-20,y-1);
+                    draw_sprite(spr_player_pan_left,1,x-20,y);
                 };
+                */
             //DOWN
             }else if(face_dir == "down"){
                 sprite_index = spr_player_mia_attack_down;
                 direction = 270;
+                //draw pan sprite
+                /*
+                if((image_index &gt;= 1)and(image_index &lt; 2)){
+                    draw_sprite(spr_player_pan_down,0,x,y-10);
+                }else if(image_index &gt;= 2){
+                    draw_sprite(spr_player_pan_down,1,x,y+10);
+                };
+                */
             };
             break;
     };
@@ -213,6 +232,7 @@ if!(game_is_paused()){
 
 //draw player sprite
 draw_sprite_ext(sprite_index,image_index,round(x),round(y),image_xscale,image_yscale,image_angle,image_blend,image_alpha);
+depth = -y;
 </string>
           </argument>
         </arguments>
