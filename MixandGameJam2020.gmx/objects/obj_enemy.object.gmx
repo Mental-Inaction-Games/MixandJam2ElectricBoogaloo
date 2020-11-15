@@ -102,7 +102,13 @@ instance_destroy();
           <argument>
             <kind>1</kind>
             <string>///Drop Item
-instance_create(x, y, drop_item);
+var chance = random(1);
+
+if(chance &lt; 0.25){
+    instance_create(x+8, y, obj_drop_lifefruit);
+}else if(chance &lt; 0.50){
+    instance_create(x+8, y, drop_item);
+};
 </string>
           </argument>
         </arguments>

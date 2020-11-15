@@ -50,14 +50,20 @@ shift = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if!(game_is_paused()){
+            <string>depth = -y;
+if!(global.game_paused){
     z = 4 + (2*sin(timer/16));
     timer++;
 };
 
-draw_sprite(spr_shadow,0,x,y);
-draw_sprite(sprite_index,image_index,x,y - z);
-depth = -y
+
+//draw shadow
+draw_sprite_ext(spr_shadow, image_index, floor(x)+8, floor(y), image_xscale, image_yscale, image_angle, image_blend, 0.5);
+
+//draw sprite
+draw_sprite_ext(sprite_index, image_index, floor(x + shift), floor(y - z), image_xscale, image_yscale, image_angle, image_blend, image_alpha);
+
+
 </string>
           </argument>
         </arguments>
