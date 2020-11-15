@@ -36,6 +36,10 @@ face_dir = "down"; //used to keep track of which of the 4 directional sprites th
 //Determines how long the player stays in the attacking state
 attack_timer = 0;
 attack_timer_max = 30;
+
+player_life = 3;
+player_life_max = 3;
+
 </string>
           </argument>
         </arguments>
@@ -120,6 +124,36 @@ if!(game_is_paused()){
     if(place_meeting(x, y, obj_drop)){
         instance_destroy(obj_drop);
     }
+};
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_sprite(spr_hud_portrait,0,8,8);
+
+for(a = 0;a &lt; player_life_max;a++){
+    draw_sprite(spr_hud_lifefruit,1, 40+(a*16),16)
+};
+for(a = 0;a &lt; player_life;a++){
+    draw_sprite(spr_hud_lifefruit,0, 40+(a*16),16)
 };
 </string>
           </argument>

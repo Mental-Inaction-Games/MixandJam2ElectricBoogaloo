@@ -49,6 +49,8 @@
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_fx_smokedust</sprite>
     <sprite>sprites\spr_fx_dust</sprite>
+    <sprite>sprites\spr_hud_portrait</sprite>
+    <sprite>sprites\spr_hud_lifefruit</sprite>
     <sprites name="NPC">
       <sprites name="Door">
         <sprite>sprites\spr_door</sprite>
