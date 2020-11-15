@@ -47,6 +47,8 @@
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_fx_smokedust</sprite>
     <sprite>sprites\spr_fx_dust</sprite>
+    <sprite>sprites\spr_hud_portrait</sprite>
+    <sprite>sprites\spr_hud_lifefruit</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tileset</background>
