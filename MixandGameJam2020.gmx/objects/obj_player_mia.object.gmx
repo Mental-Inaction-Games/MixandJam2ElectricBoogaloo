@@ -48,6 +48,38 @@ is_flashing = false;
 flashing_timer = 0;
 flash_state = 1;
 invincible_timer = 0;
+
+finish_recipe = false;
+recipe_success = false;
+pot_offset = 0;
+result_offset = 16;
+result_alpha = 0;
+close_recipe_timer = 90;
+last_enemy_name = "";
+last_enemy_sprite = spr_enemy;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>instance_create(0,0,obj_mini_slider);
 </string>
           </argument>
         </arguments>
@@ -175,7 +207,7 @@ if!(game_is_paused()){
                 var drop_inst = instance_nearest(x,y,obj_drop);
                 
                 player_state = "state_recipe";
-                instance_create(0,0,obj_mini_slider)
+                alarm[0] = room_speed/2;
                 with(drop_inst){
                     instance_destroy();
                 };
@@ -190,10 +222,6 @@ if!(game_is_paused()){
             
         case "state_recipe":
             game_set_pause(true);
-            if!(instance_exists(obj_mini_slider)){
-                player_state = "state_walk";
-                game_set_pause(false); 
-            };
             break;
     };
     
@@ -266,9 +294,11 @@ if!(game_is_paused()){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(spr_hud_portrait,0,8,8);
+            <string>//draw last enemy defeated
+draw_sprite(last_enemy_sprite,0,4,view_hview-4);
+draw_text(20,view_hview-14,last_enemy_name);
 
-
+//draw the recipe minigame screen
 if(player_state == "state_recipe"){
     draw_set_color(c_black);
     draw_set_alpha(0.75);
@@ -278,14 +308,48 @@ if(player_state == "state_recipe"){
     draw_set_halign(fa_center);
     draw_text(view_wview/2,64,"Press X to cook at# the right time!")
     draw_set_halign(fa_left);
-    draw_sprite(spr_hud_pot,0,view_wview/2,(view_hview/2)+16);
+    
+    //only move the pan and draw results after you've finished the minigame
+    if(finish_recipe == true){
+        if(pot_offset &gt; -16){
+            pot_offset--;
+        };
+        if(result_offset &gt; 0){
+            result_offset--;
+        };
+        if(result_alpha &lt; 1){
+            result_alpha += 0.1;
+        };
+        
+        draw_set_alpha(result_alpha);
+        draw_sprite(spr_hud_result,recipe_success,(view_wview/2)+32,(view_hview/2)+16+result_offset);
+        draw_set_alpha(1);
+        
+        //close the recipe minigame after another second has passed
+        if(close_recipe_timer &gt; 0){
+            close_recipe_timer--;
+        }else{
+            player_state = "state_walk";
+            game_set_pause(false);
+            finish_recipe = false;
+            recipe_success = false;
+            pot_offset = 0;
+            result_offset = 16;
+            result_alpha = 0;
+            close_recipe_timer = 90;
+        };
+    };
+    draw_sprite(spr_hud_pot,0,(view_wview/2)+pot_offset,(view_hview/2)+16);
     draw_sprite(spr_hud_minigame,0,view_wview/2,(view_hview/2)+40);
 };
 
+draw_sprite(spr_hud_portrait,(player_state == "state_hurt"),8,8);
+
 for(a = 0;a &lt; player_life_max;a++){
-    draw_sprite(spr_hud_lifefruit,1, 40+(a*16),16)
+    draw_sprite(spr_hud_lifefruit,1, 40+(a*16),16);
 };
 player_life = clamp(player_life,0,player_life_max);
+
 for(a = 0;a &lt; player_life;a++){
     draw_sprite(spr_hud_lifefruit,0, 40+(a*16),16)
 };
@@ -432,8 +496,6 @@ if(place_meeting(x,y,obj_drop)){
     draw_sprite(spr_interact,0,drop_inst.x-8,drop_inst.y-32);
     draw_text(drop_inst.x+16,drop_inst.y-32,"PICK UP");
 };
-
-draw_text(x,y,player_state);
 </string>
           </argument>
         </arguments>

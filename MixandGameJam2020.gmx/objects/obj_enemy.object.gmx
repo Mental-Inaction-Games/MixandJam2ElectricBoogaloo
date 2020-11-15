@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///Enemy Initiate
+enemy_name = "test";
 drop_item = obj_drop_honey;
 z = 0;
 willdie = false;
@@ -282,6 +283,12 @@ if(place_meeting(x, y, obj_attack_player)){
     alarm[1] = room_speed/2;
     vy = lengthdir_y(1.5, point_direction(obj_player_mia.x, obj_player_mia.y, x, y))
     vx = lengthdir_x(1.5, point_direction(obj_player_mia.x, obj_player_mia.y, x, y))
+    
+    //set players enemy name
+    if(instance_exists(obj_player_mia)){
+        obj_player_mia.last_enemy_name = enemy_name;
+        obj_player_mia.last_enemy_sprite = sprite_index;  
+    };
 };
 
 //After slime attacked

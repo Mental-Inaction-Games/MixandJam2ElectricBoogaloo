@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
+enemy_name = "Honey Slime";
 drop_item = obj_drop_honey;
 </string>
           </argument>

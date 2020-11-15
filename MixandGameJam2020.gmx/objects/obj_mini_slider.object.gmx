@@ -3,7 +3,7 @@
   <spriteName>spr_hud_slider</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1410065408</depth>
+  <depth>-10000000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -53,8 +53,17 @@ path_start(path_slider,0,path_action_stop,true);
             <string>path_speed += 0.0075;
 image_angle -= 0.75;
 
+if(keyboard_check_pressed(ord("X"))){
+    if((path_position &gt;= 0.55)and(path_position &lt;= 0.85)){
+        obj_player_mia.recipe_success = true;
+    };
+    
+    obj_player_mia.finish_recipe = true;
+    instance_destroy();
+};
+
 if(path_position &gt;= 1){
-    game_set_pause(false);
+    obj_player_mia.finish_recipe = true;
     instance_destroy();
 };
 </string>
