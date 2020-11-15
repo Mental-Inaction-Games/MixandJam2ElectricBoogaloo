@@ -87,12 +87,13 @@
       <object>objects\obj_drop_ham</object>
       <object>objects\obj_item</object>
       <object>objects\obj_drop_lifefruit</object>
+      <object>objects\obj_drop_tomato</object>
     </objects>
     <objects name="Enemies">
       <object>objects\obj_attack_enemy</object>
       <object>objects\obj_enemy</object>
       <object>objects\obj_enemy_chicken</object>
-      <object>objects\obj_tomato_enemy</object>
+      <object>objects\obj_enemy_tomato</object>
       <object>objects\obj_enemy_slime</object>
       <object>objects\obj_enemy_noodle</object>
       <object>objects\obj_enemy_carrot</object>
