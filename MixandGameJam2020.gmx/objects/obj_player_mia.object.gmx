@@ -41,6 +41,8 @@ player_life = 3;
 player_life_max = 3;
 can_take_damage = true;
 hurt_timer = 0;
+carry_inst = self;
+carry_sprite = sprite_index;
 
 is_flashing = false;
 flashing_timer = 0;
@@ -74,6 +76,15 @@ right = keyboard_check(vk_right);
 up = keyboard_check(vk_up);
 down = keyboard_check(vk_down);
 attack = keyboard_check_pressed(ord("Z"));
+pickup = keyboard_check_pressed(ord("X"));
+
+if((keyboard_check_pressed(vk_enter))or(keyboard_check_pressed(vk_escape))){
+    if!(game_is_paused()){
+        game_set_pause(true);
+    }else{
+        game_set_pause(false);
+    };
+};
 
 if!(game_is_paused()){
     //finite state machine
@@ -96,6 +107,18 @@ if!(game_is_paused()){
                 attack_timer = attack_timer_max;
                 vx = 0;
                 vy = 0;
+            };
+            
+            //carry items
+            if((pickup)and(place_meeting(x,y,obj_drop))){
+                var drop_inst = instance_nearest(x,y,obj_drop);
+                
+                player_state = "state_carry";
+                carry_inst = drop_inst.object_index;
+                carry_sprite = drop_inst.sprite_index;
+                with(drop_inst){
+                    instance_destroy();
+                };
             };
             break;
             
@@ -133,6 +156,45 @@ if!(game_is_paused()){
                 vy = 0;
             };
             break;
+            
+        case "state_carry":
+            can_take_damage = true;
+            //set x and y velocity according to player inputs
+            vx = (right - left) * player_speed;
+            vy = (down - up) * player_speed;
+            
+            //get direction the player is holding, if the player is holding a direction. This is used for animation
+            if((left)or(up)or(right)or(down)){
+                direction = point_direction(0,0,right - left,down - up);
+            };
+            
+            
+            
+            //cooking
+            if((pickup)and(place_meeting(x,y,obj_drop))){
+                var drop_inst = instance_nearest(x,y,obj_drop);
+                
+                player_state = "state_recipe";
+                instance_create(0,0,obj_mini_slider)
+                with(drop_inst){
+                    instance_destroy();
+                };
+            }
+            //drop item
+            else if(pickup){
+                player_state = "state_walk";
+                instance_create(x,y,carry_inst);
+                carry_inst = self;
+            };
+            break;
+            
+        case "state_recipe":
+            game_set_pause(true);
+            if!(instance_exists(obj_mini_slider)){
+                player_state = "state_walk";
+                game_set_pause(false); 
+            };
+            break;
     };
     
     //taking damage
@@ -142,6 +204,10 @@ if!(game_is_paused()){
     if((place_meeting(x, y, obj_attack_enemy))and(can_take_damage)and(invincible_timer &lt;= 0)){
         var hurt_inst = instance_nearest(x,y,obj_attack_enemy);
         
+        if(carry_inst != self){
+            instance_create(x,y,carry_inst);
+            carry_inst = self;
+        };
         player_state = "state_hurt";
         player_life--;
         flashing_timer = 1;
@@ -201,6 +267,20 @@ if!(game_is_paused()){
           <argument>
             <kind>1</kind>
             <string>draw_sprite(spr_hud_portrait,0,8,8);
+
+
+if(player_state == "state_recipe"){
+    draw_set_color(c_black);
+    draw_set_alpha(0.75);
+    draw_rectangle(0,0,view_wview,view_hview,0);
+    draw_set_alpha(1);
+    draw_set_color(c_white);
+    draw_set_halign(fa_center);
+    draw_text(view_wview/2,64,"Press X to cook at# the right time!")
+    draw_set_halign(fa_left);
+    draw_sprite(spr_hud_pot,0,view_wview/2,(view_hview/2)+16);
+    draw_sprite(spr_hud_minigame,0,view_wview/2,(view_hview/2)+40);
+};
 
 for(a = 0;a &lt; player_life_max;a++){
     draw_sprite(spr_hud_lifefruit,1, 40+(a*16),16)
@@ -282,14 +362,6 @@ for(a = 0;a &lt; player_life;a++){
             if(face_dir == "right"){
                 sprite_index = spr_player_mia_attack_right;
                 direction = 0;
-                //draw pan sprite
-                /*
-                if((image_index &gt;= 1)and(image_index &lt; 2)){
-                    draw_sprite(spr_player_pan_right,0,x-20,y-10);
-                }else if(image_index &gt;= 2){
-                    draw_sprite(spr_player_pan_right,1,x+3,y);
-                };
-                */
             //UP
             }else if(face_dir == "up"){
                 sprite_index = spr_player_mia_attack_up;
@@ -298,34 +370,70 @@ for(a = 0;a &lt; player_life;a++){
             }else if(face_dir == "left"){
                 sprite_index = spr_player_mia_attack_left;
                 direction = 180;
-                //draw pan sprite
-                /*
-                if((image_index &gt;= 1)and(image_index &lt; 2)){
-                    draw_sprite(spr_player_pan_left,0,x+3,y-10);
-                }else if(image_index &gt;= 2){
-                    draw_sprite(spr_player_pan_left,1,x-20,y);
-                };
-                */
             //DOWN
             }else if(face_dir == "down"){
                 sprite_index = spr_player_mia_attack_down;
                 direction = 270;
-                //draw pan sprite
-                /*
-                if((image_index &gt;= 1)and(image_index &lt; 2)){
-                    draw_sprite(spr_player_pan_down,0,x,y-10);
-                }else if(image_index &gt;= 2){
-                    draw_sprite(spr_player_pan_down,1,x,y+10);
+            };
+            break;
+            
+    case "state_carry":
+            //sprites to use when moving
+            if((left)or(up)or(right)or(down)){
+                image_speed = 0.15;
+                //RIGHT
+                if(direction == 0){
+                    sprite_index = spr_player_mia_walk_right;face_dir = "right";
+                //UP
+                }else if(direction == 90){
+                    sprite_index = spr_player_mia_walk_up;face_dir = "up";
+                //LEFT
+                }else if(direction == 180){
+                    sprite_index = spr_player_mia_walk_left;face_dir = "left";
+                //DOWN
+                }else if(direction == 270){
+                    sprite_index = spr_player_mia_walk_down;face_dir = "down";
                 };
-                */
+            //sprites to use while standing still
+            }else{
+                image_speed = 0;
+                //RIGHT
+                if(face_dir == "right"){
+                    sprite_index = spr_player_mia_stand_right;direction = 0;
+                //UP
+                }else if(face_dir == "up"){
+                    sprite_index = spr_player_mia_stand_up;direction = 90;
+                //LEFT
+                }else if(face_dir == "left"){
+                    sprite_index = spr_player_mia_stand_left;direction = 180;
+                //DOWN
+                }else if(face_dir == "down"){
+                    sprite_index = spr_player_mia_stand_down;direction = 270;
+                };
             };
             break;
     };
+}else{
+    image_speed = 0;
 };
 
 //draw player sprite
 draw_sprite_ext(sprite_index,image_index,round(x),round(y),image_xscale,image_yscale,image_angle,image_blend,flash_state);
 depth = -y;
+
+if(player_state == "state_carry"){
+    draw_sprite(carry_sprite,0,x,y-12);
+};
+
+//draw interact
+if(place_meeting(x,y,obj_drop)){
+    var drop_inst = instance_nearest(x,y,obj_drop);
+    
+    draw_sprite(spr_interact,0,drop_inst.x-8,drop_inst.y-32);
+    draw_text(drop_inst.x+16,drop_inst.y-32,"PICK UP");
+};
+
+draw_text(x,y,player_state);
 </string>
           </argument>
         </arguments>

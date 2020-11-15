@@ -63,13 +63,18 @@
       <sprite>sprites\spr_hud_portrait</sprite>
       <sprite>sprites\spr_interact</sprite>
       <sprite>sprites\spr_hud_lifefruit</sprite>
+      <sprite>sprites\spr_hud_pot</sprite>
+      <sprite>sprites\spr_hud_minigame</sprite>
+      <sprite>sprites\spr_hud_slider</sprite>
     </sprites>
     <sprite>sprites\spr_arrow</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tileset</background>
   </backgrounds>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\path_slider</path>
+  </paths>
   <scripts name="scripts">
     <script>scripts\game_is_paused.gml</script>
     <script>scripts\game_set_pause.gml</script>
@@ -78,6 +83,11 @@
     <objects name="Debug">
       <object>objects\obj_test</object>
       <object>objects\obj_player</object>
+    </objects>
+    <objects name="Handlers">
+      <object>objects\obj_game_init</object>
+      <object>objects\obj_handler</object>
+      <object>objects\obj_handler_global</object>
     </objects>
     <objects name="Drops">
       <object>objects\obj_drop</object>
@@ -98,16 +108,12 @@
       <object>objects\obj_enemy_noodle</object>
       <object>objects\obj_enemy_carrot</object>
     </objects>
-    <objects name="Handlers">
-      <object>objects\obj_game_init</object>
-      <object>objects\obj_handler</object>
-      <object>objects\obj_handler_global</object>
-    </objects>
     <object>objects\obj_player_mia</object>
     <object>objects\obj_attack_player</object>
     <object>objects\obj_solid</object>
     <object>objects\obj_door</object>
     <object>objects\obj_fx_dust</object>
+    <object>objects\obj_mini_slider</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
