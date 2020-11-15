@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>///Enemy Initiate
 
+willdie = false;
+
 image_speed = 0.25;
 
 left = 0;
@@ -45,6 +47,30 @@ targetY = 0;
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Instance Destroy
+instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -146,7 +172,7 @@ can_move = true;
             <kind>1</kind>
             <string>///Enemy Step Movement
 
-if(can_move == true){
+if(can_move == true &amp;&amp; willdie = false){
     if(left){
         if(x &gt; targetX){
             x -= 1;
@@ -178,6 +204,45 @@ if(can_move == true){
 }
 
 depth = -y
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Death Condition
+
+//When attacked
+if(place_meeting(x, y, obj_attack_player)){
+    willdie = true;
+    alarm[1] = room_speed;
+    vy = lengthdir_y(2, point_direction(obj_player_mia.x, obj_player_mia.y, x, y))
+    vx = lengthdir_x(2, point_direction(obj_player_mia.x, obj_player_mia.y, x, y))
+}
+
+//After slime attacked
+if(willdie){
+    if!(place_meeting(x + vx, y, obj_solid)){
+        x += vx;
+    };
+    if!(place_meeting(x, y + vy, obj_solid)){
+        y += vy;
+    };
+}
 </string>
           </argument>
         </arguments>
