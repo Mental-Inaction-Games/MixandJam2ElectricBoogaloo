@@ -56,6 +56,9 @@ image_angle -= 0.75;
 if(keyboard_check_pressed(ord("X"))){
     if((path_position &gt;= 0.55)and(path_position &lt;= 0.85)){
         obj_player_mia.recipe_success = true;
+        audio_play_sound(snd_success,10,0);
+    }else{
+        audio_play_sound(snd_failure,10,0);
     };
     
     obj_player_mia.finish_recipe = true;
