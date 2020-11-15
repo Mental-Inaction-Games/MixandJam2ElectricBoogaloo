@@ -54,6 +54,9 @@
     <sprites name="NPC">
       <sprites name="Door">
         <sprite>sprites\spr_door</sprite>
+        <sprite>sprites\spr_door_speaking</sprite>
+        <sprite>sprites\spr_door_idle</sprite>
+        <sprite>sprites\spr_open</sprite>
       </sprites>
     </sprites>
     <sprite>sprites\spr_shadow</sprite>
