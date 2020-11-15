@@ -115,6 +115,11 @@ if!(game_is_paused()){
     if!(place_meeting(x, y + vy, obj_solid)){
         y += vy;
     };
+    
+    //pickup drop
+    if(place_meeting(x, y, obj_drop)){
+        instance_destroy(obj_drop);
+    }
 };
 </string>
           </argument>

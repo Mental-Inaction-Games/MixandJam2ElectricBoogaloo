@@ -42,7 +42,7 @@
     <sprites name="Drops">
       <sprite>sprites\spr_egg_drop</sprite>
       <sprite>sprites\spr_ham_drop</sprite>
-      <sprite>sprites\sprite28</sprite>
+      <sprite>sprites\spr_honey_drop</sprite>
     </sprites>
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_fx_smokedust</sprite>
@@ -70,6 +70,7 @@
     <object>objects\obj_door</object>
     <object>objects\obj_enemy</object>
     <object>objects\obj_fx_dust</object>
+    <object>objects\obj_drop</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
