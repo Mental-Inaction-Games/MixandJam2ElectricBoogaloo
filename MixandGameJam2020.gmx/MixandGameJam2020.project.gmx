@@ -63,12 +63,17 @@
       <sprite>sprites\spr_hud_portrait</sprite>
       <sprite>sprites\spr_interact</sprite>
       <sprite>sprites\spr_hud_lifefruit</sprite>
+      <sprite>sprites\spr_hud_pot</sprite>
+      <sprite>sprites\spr_hud_minigame</sprite>
+      <sprite>sprites\spr_hud_slider</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tileset</background>
   </backgrounds>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\path_slider</path>
+  </paths>
   <scripts name="scripts">
     <script>scripts\game_is_paused.gml</script>
     <script>scripts\game_set_pause.gml</script>
@@ -107,6 +112,7 @@
     <object>objects\obj_solid</object>
     <object>objects\obj_door</object>
     <object>objects\obj_fx_dust</object>
+    <object>objects\obj_mini_slider</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
