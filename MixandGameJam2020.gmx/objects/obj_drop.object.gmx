@@ -28,6 +28,7 @@
             <string>timer = 0;
 z = 0;
 shift = 0;
+item_name = "Test";
 </string>
           </argument>
         </arguments>

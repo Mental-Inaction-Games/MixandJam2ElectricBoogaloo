@@ -494,7 +494,7 @@ if(place_meeting(x,y,obj_drop)){
     var drop_inst = instance_nearest(x,y,obj_drop);
     
     draw_sprite(spr_interact,0,drop_inst.x-8,drop_inst.y-32);
-    draw_text(drop_inst.x+16,drop_inst.y-32,"PICK UP");
+    draw_text(drop_inst.x+8,drop_inst.y-30,drop_inst.item_name);
 };
 </string>
           </argument>

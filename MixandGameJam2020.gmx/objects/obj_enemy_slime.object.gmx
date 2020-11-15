@@ -108,7 +108,7 @@ if(target_direction == "down"){
 
 
 
-
+audio_play_sound(snd_slime_squish,10,0);
 can_move = true;
 
 </string>

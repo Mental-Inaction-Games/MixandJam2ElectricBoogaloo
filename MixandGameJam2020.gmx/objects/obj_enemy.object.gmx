@@ -80,7 +80,7 @@ for(a = 0;a &lt; 8;a++){
     instance_create(x + 8 + irandom_range(-8,8), y + irandom_range(-8,8), obj_fx_dust);
 };
 
-
+audio_play_sound(snd_enemy_die,10,0);
 instance_destroy();
 </string>
           </argument>
