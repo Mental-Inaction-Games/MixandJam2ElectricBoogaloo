@@ -45,6 +45,7 @@ hurt_timer = 0;
 is_flashing = false;
 flashing_timer = 0;
 flash_state = 1;
+invincible_timer = 0;
 </string>
           </argument>
         </arguments>
@@ -127,6 +128,7 @@ if!(game_is_paused()){
                 player_state = "state_walk";
                 is_flashing = false;
                 flash_state = 1;
+                invincible_timer = 30;
                 vx = 0;
                 vy = 0;
             };
@@ -134,7 +136,10 @@ if!(game_is_paused()){
     };
     
     //taking damage
-    if((place_meeting(x, y, obj_attack_enemy))and(can_take_damage)){
+    if((can_take_damage)and(invincible_timer &gt; 0)){
+        invincible_timer--;
+    };
+    if((place_meeting(x, y, obj_attack_enemy))and(can_take_damage)and(invincible_timer &lt;= 0)){
         var hurt_inst = instance_nearest(x,y,obj_attack_enemy);
         
         player_state = "state_hurt";
@@ -200,6 +205,7 @@ if!(game_is_paused()){
 for(a = 0;a &lt; player_life_max;a++){
     draw_sprite(spr_hud_lifefruit,1, 40+(a*16),16)
 };
+player_life = clamp(player_life,0,player_life_max);
 for(a = 0;a &lt; player_life;a++){
     draw_sprite(spr_hud_lifefruit,0, 40+(a*16),16)
 };

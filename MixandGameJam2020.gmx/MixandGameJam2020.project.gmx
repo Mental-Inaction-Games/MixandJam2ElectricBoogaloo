@@ -8,9 +8,9 @@
   <sprites name="sprites">
     <sprite>sprites\spr_debug</sprite>
     <sprite>sprites\sprite2</sprite>
+    <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_block</sprite>
-    <sprite>sprites\spr_font_vwf_shadow</sprite>
     <sprites name="Player Mia">
       <sprite>sprites\spr_player_mia</sprite>
       <sprite>sprites\spr_player_mia_stand_up</sprite>
@@ -45,18 +45,22 @@
       <sprite>sprites\spr_honey_drop</sprite>
       <sprite>sprites\spr_noodle_drop</sprite>
       <sprite>sprites\spr_tomato_drop</sprite>
+      <sprite>sprites\spr_heart_drop</sprite>
     </sprites>
-    <sprite>sprites\spr_enemy</sprite>
-    <sprite>sprites\spr_fx_smokedust</sprite>
-    <sprite>sprites\spr_fx_dust</sprite>
-    <sprite>sprites\spr_hud_portrait</sprite>
-    <sprite>sprites\spr_hud_lifefruit</sprite>
     <sprites name="NPC">
       <sprites name="Door">
         <sprite>sprites\spr_door</sprite>
       </sprites>
     </sprites>
+    <sprite>sprites\spr_fx_dust</sprite>
+    <sprite>sprites\spr_fx_smokedust</sprite>
     <sprite>sprites\spr_shadow</sprite>
+    <sprites name="HUD">
+      <sprite>sprites\spr_font_vwf_shadow</sprite>
+      <sprite>sprites\spr_hud_portrait</sprite>
+      <sprite>sprites\spr_interact</sprite>
+      <sprite>sprites\spr_hud_lifefruit</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tileset</background>
@@ -67,6 +71,10 @@
     <script>scripts\game_set_pause.gml</script>
   </scripts>
   <objects name="objects">
+    <objects name="Debug">
+      <object>objects\obj_test</object>
+      <object>objects\obj_player</object>
+    </objects>
     <objects name="Drops">
       <object>objects\obj_drop</object>
       <object>objects\obj_drop_egg</object>
@@ -74,6 +82,8 @@
       <object>objects\obj_drop_carrot</object>
       <object>objects\obj_drop_honey</object>
       <object>objects\obj_drop_ham</object>
+      <object>objects\obj_item</object>
+      <object>objects\obj_drop_lifefruit</object>
     </objects>
     <objects name="Enemies">
       <object>objects\obj_attack_enemy</object>
@@ -89,13 +99,11 @@
       <object>objects\obj_handler</object>
       <object>objects\obj_handler_global</object>
     </objects>
+    <object>objects\obj_player_mia</object>
     <object>objects\obj_attack_player</object>
+    <object>objects\obj_solid</object>
     <object>objects\obj_door</object>
     <object>objects\obj_fx_dust</object>
-    <object>objects\obj_player</object>
-    <object>objects\obj_player_mia</object>
-    <object>objects\obj_solid</object>
-    <object>objects\obj_test</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
