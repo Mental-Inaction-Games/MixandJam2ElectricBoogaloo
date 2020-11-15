@@ -209,43 +209,48 @@ can_move = true;
           <argument>
             <kind>1</kind>
             <string>///Enemy Step Movement
-if(can_move == true &amp;&amp; willdie = false){
-    image_speed = 0.3;
-    if(left){
-        if(x &gt; targetX){
-            x -= 0.4;
-        }else{
-            x = targetX;
-            can_move = false;
+if!(game_is_paused()){
+    if(can_move == true &amp;&amp; willdie = false){
+        image_speed = 0.3;
+        if(left){
+            if(x &gt; targetX){
+                x -= 0.4;
+            }else{
+                x = targetX;
+                can_move = false;
+            };
         };
-    };
-    if(right){
-        if(x &lt; targetX){
-            x += 0.4;
-        }else{
-            x = targetX;
-            can_move = false;
+        if(right){
+            if(x &lt; targetX){
+                x += 0.4;
+            }else{
+                x = targetX;
+                can_move = false;
+            };
         };
-    };
-    if(up){
-        if(y &gt; targetY){
-            y -= 0.4;
-        }else{
-            y = targetY;
-            can_move = false;
+        if(up){
+            if(y &gt; targetY){
+                y -= 0.4;
+            }else{
+                y = targetY;
+                can_move = false;
+            };
         };
-    };
-    if(down){
-        if(y &lt; targetY){
-            y += 0.4;
-        }else{
-            y = targetY;
-            can_move = false;
+        if(down){
+            if(y &lt; targetY){
+                y += 0.4;
+            }else{
+                y = targetY;
+                can_move = false;
+            };
         };
+    }else{
+        image_speed = 0;
+        image_index = 0;
     };
 }else{
-    image_speed = 0;
-    image_index = 0;
+    alarm[0]++;
+    alarm[1]++;
 };
 </string>
           </argument>
@@ -280,7 +285,7 @@ if(place_meeting(x, y, obj_attack_player)){
 };
 
 //After slime attacked
-if(willdie){
+if((willdie)and!(game_is_paused())){
     if!(place_meeting(x + vx, y, obj_solid)){
         x += vx;
     };
@@ -309,7 +314,7 @@ if(willdie){
           <argument>
             <kind>1</kind>
             <string>///flash timer
-if(is_flashing){
+if((is_flashing)and!(game_is_paused())){
     if(flashing_timer &gt; 0){
         flashing_timer--;
     }else{
@@ -347,6 +352,9 @@ if(is_flashing){
 draw_sprite(spr_shadow,0,x+8,y);
 draw_sprite_ext(sprite_index,image_index,round(x),round(y)-z,image_xscale,image_yscale,image_angle,image_blend,flash_state);
 
+if(game_is_paused()){
+    image_speed = 0;
+};
 </string>
           </argument>
         </arguments>

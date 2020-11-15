@@ -74,6 +74,15 @@ right = keyboard_check(vk_right);
 up = keyboard_check(vk_up);
 down = keyboard_check(vk_down);
 attack = keyboard_check_pressed(ord("Z"));
+pickup = keyboard_check_pressed(ord("X"));
+
+if((keyboard_check_pressed(vk_enter))or(keyboard_check_pressed(vk_escape))){
+    if!(game_is_paused()){
+        game_set_pause(true);
+    }else{
+        game_set_pause(false);
+    };
+};
 
 if!(game_is_paused()){
     //finite state machine
@@ -96,6 +105,18 @@ if!(game_is_paused()){
                 attack_timer = attack_timer_max;
                 vx = 0;
                 vy = 0;
+            };
+            
+            //carry items
+            if((pickup)and(place_meeting(x,y,obj_drop))){
+                var drop_inst = instance_nearest(x,y,obj_drop);
+                
+                player_state = "state_carry";
+                carry_inst = drop_inst;
+                carry_sprite = drop_inst.sprite_index;
+                with(drop_inst){
+                    instance_destroy();
+                };
             };
             break;
             
@@ -132,6 +153,9 @@ if!(game_is_paused()){
                 vx = 0;
                 vy = 0;
             };
+            break;
+            
+        case "state_carry":
             break;
     };
     
@@ -282,14 +306,6 @@ for(a = 0;a &lt; player_life;a++){
             if(face_dir == "right"){
                 sprite_index = spr_player_mia_attack_right;
                 direction = 0;
-                //draw pan sprite
-                /*
-                if((image_index &gt;= 1)and(image_index &lt; 2)){
-                    draw_sprite(spr_player_pan_right,0,x-20,y-10);
-                }else if(image_index &gt;= 2){
-                    draw_sprite(spr_player_pan_right,1,x+3,y);
-                };
-                */
             //UP
             }else if(face_dir == "up"){
                 sprite_index = spr_player_mia_attack_up;
@@ -298,34 +314,28 @@ for(a = 0;a &lt; player_life;a++){
             }else if(face_dir == "left"){
                 sprite_index = spr_player_mia_attack_left;
                 direction = 180;
-                //draw pan sprite
-                /*
-                if((image_index &gt;= 1)and(image_index &lt; 2)){
-                    draw_sprite(spr_player_pan_left,0,x+3,y-10);
-                }else if(image_index &gt;= 2){
-                    draw_sprite(spr_player_pan_left,1,x-20,y);
-                };
-                */
             //DOWN
             }else if(face_dir == "down"){
                 sprite_index = spr_player_mia_attack_down;
                 direction = 270;
-                //draw pan sprite
-                /*
-                if((image_index &gt;= 1)and(image_index &lt; 2)){
-                    draw_sprite(spr_player_pan_down,0,x,y-10);
-                }else if(image_index &gt;= 2){
-                    draw_sprite(spr_player_pan_down,1,x,y+10);
-                };
-                */
             };
             break;
     };
+}else{
+    image_speed = 0;
 };
 
 //draw player sprite
 draw_sprite_ext(sprite_index,image_index,round(x),round(y),image_xscale,image_yscale,image_angle,image_blend,flash_state);
 depth = -y;
+
+//draw interact
+if(place_meeting(x,y,obj_drop)){
+    var drop_inst = instance_nearest(x,y,obj_drop);
+    
+    draw_sprite(spr_interact,0,drop_inst.x-8,drop_inst.y-32);
+    draw_text(drop_inst.x+16,drop_inst.y-32,"PICK UP");
+};
 </string>
           </argument>
         </arguments>

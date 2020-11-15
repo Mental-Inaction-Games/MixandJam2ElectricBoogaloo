@@ -75,6 +75,11 @@
       <object>objects\obj_test</object>
       <object>objects\obj_player</object>
     </objects>
+    <objects name="Handlers">
+      <object>objects\obj_game_init</object>
+      <object>objects\obj_handler</object>
+      <object>objects\obj_handler_global</object>
+    </objects>
     <objects name="Drops">
       <object>objects\obj_drop</object>
       <object>objects\obj_drop_egg</object>
@@ -93,11 +98,6 @@
       <object>objects\obj_enemy_slime</object>
       <object>objects\obj_enemy_noodle</object>
       <object>objects\obj_enemy_carrot</object>
-    </objects>
-    <objects name="Handlers">
-      <object>objects\obj_game_init</object>
-      <object>objects\obj_handler</object>
-      <object>objects\obj_handler_global</object>
     </objects>
     <object>objects\obj_player_mia</object>
     <object>objects\obj_attack_player</object>
