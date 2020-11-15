@@ -31,7 +31,6 @@
       <sprite>sprites\spr_player_pan_up</sprite>
       <sprite>sprites\spr_player_pan_right</sprite>
     </sprites>
-    <sprite>sprites\spr_door</sprite>
     <sprites name="Enemies">
       <sprite>sprites\spr_chicken</sprite>
       <sprite>sprites\spr_slime</sprite>
@@ -40,15 +39,23 @@
       <sprite>sprites\spr_tomato</sprite>
     </sprites>
     <sprites name="Drops">
+      <sprite>sprites\spr_carrot_drop</sprite>
       <sprite>sprites\spr_egg_drop</sprite>
       <sprite>sprites\spr_ham_drop</sprite>
-      <sprite>sprites\sprite28</sprite>
+      <sprite>sprites\spr_honey_drop</sprite>
+      <sprite>sprites\spr_noodle_drop</sprite>
+      <sprite>sprites\spr_tomato_drop</sprite>
     </sprites>
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_fx_smokedust</sprite>
     <sprite>sprites\spr_fx_dust</sprite>
     <sprite>sprites\spr_hud_portrait</sprite>
     <sprite>sprites\spr_hud_lifefruit</sprite>
+    <sprites name="NPC">
+      <sprites name="Door">
+        <sprite>sprites\spr_door</sprite>
+      </sprites>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tileset</background>
@@ -59,19 +66,34 @@
     <script>scripts\game_set_pause.gml</script>
   </scripts>
   <objects name="objects">
-    <object>objects\obj_test</object>
+    <objects name="Drops">
+      <object>objects\obj_drop_egg</object>
+      <object>objects\obj_drop_noodle</object>
+      <object>objects\obj_drop_carrot</object>
+      <object>objects\obj_drop_honey</object>
+      <object>objects\obj_drop_ham</object>
+    </objects>
+    <objects name="Enemies">
+      <object>objects\obj_enemy_chicken</object>
+      <object>objects\obj_tomato_enemy</object>
+      <object>objects\obj_enemy_slime</object>
+      <object>objects\obj_enemy_noodle</object>
+      <object>objects\obj_enemy_carrot</object>
+    </objects>
     <objects name="Handlers">
       <object>objects\obj_game_init</object>
       <object>objects\obj_handler</object>
       <object>objects\obj_handler_global</object>
     </objects>
+    <object>objects\obj_attack_player</object>
+    <object>objects\obj_door</object>
+    <object>objects\obj_drop</object>
+    <object>objects\obj_enemy</object>
+    <object>objects\obj_fx_dust</object>
     <object>objects\obj_player</object>
     <object>objects\obj_player_mia</object>
     <object>objects\obj_solid</object>
-    <object>objects\obj_attack_player</object>
-    <object>objects\obj_door</object>
-    <object>objects\obj_enemy</object>
-    <object>objects\obj_fx_dust</object>
+    <object>objects\obj_test</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
