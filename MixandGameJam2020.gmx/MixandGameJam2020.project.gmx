@@ -27,6 +27,9 @@
       <sprite>sprites\spr_player_mia_attack_right</sprite>
       <sprite>sprites\spr_player_attack_hitbox</sprite>
       <sprite>sprites\spr_player_pan_left</sprite>
+      <sprite>sprites\spr_player_pan_down</sprite>
+      <sprite>sprites\spr_player_pan_up</sprite>
+      <sprite>sprites\spr_player_pan_right</sprite>
     </sprites>
     <sprite>sprites\spr_door</sprite>
     <sprites name="Enemies">
@@ -42,6 +45,8 @@
       <sprite>sprites\sprite28</sprite>
     </sprites>
     <sprite>sprites\spr_enemy</sprite>
+    <sprite>sprites\spr_fx_smokedust</sprite>
+    <sprite>sprites\spr_fx_dust</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tileset</background>
@@ -64,6 +69,7 @@
     <object>objects\obj_attack_player</object>
     <object>objects\obj_door</object>
     <object>objects\obj_enemy</object>
+    <object>objects\obj_fx_dust</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
