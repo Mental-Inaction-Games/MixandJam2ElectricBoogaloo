@@ -46,6 +46,11 @@
       <sprite>sprites\spr_noodle</sprite>
       <sprite>sprites\spr_carrot</sprite>
       <sprite>sprites\spr_tomato</sprite>
+      <sprites name="Hammy">
+        <sprite>sprites\spr_hammy_front</sprite>
+        <sprite>sprites\spr_hammy_side</sprite>
+        <sprite>sprites\spr_hammy_back</sprite>
+      </sprites>
     </sprites>
     <sprites name="Drops">
       <sprite>sprites\spr_carrot_drop</sprite>
