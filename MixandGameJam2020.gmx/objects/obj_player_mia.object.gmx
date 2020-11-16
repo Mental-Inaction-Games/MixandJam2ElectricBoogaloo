@@ -57,6 +57,9 @@ result_alpha = 0;
 close_recipe_timer = 90;
 last_enemy_name = "";
 last_enemy_sprite = spr_enemy;
+recipe_item_1 = sprite_index;
+recipe_item_2 = sprite_index;
+recipe_success_name = "Test";
 </string>
           </argument>
         </arguments>
@@ -145,6 +148,7 @@ if!(game_is_paused()){
             if((pickup)and(place_meeting(x,y,obj_drop))){
                 var drop_inst = instance_nearest(x,y,obj_drop);
                 
+                audio_play_sound(snd_pickitem,10,0);
                 player_state = "state_carry";
                 carry_inst = drop_inst.object_index;
                 carry_sprite = drop_inst.sprite_index;
@@ -200,21 +204,30 @@ if!(game_is_paused()){
                 direction = point_direction(0,0,right - left,down - up);
             };
             
-            
-            
+        
+            //giving food to door
+            if((pickup)and(place_meeting(x,y-16,obj_door))){
+                obj_door.door_state = "state_eating";
+                obj_door.food_given = carry_sprite;
+                player_state = "state_walk";
+                carry_inst = obj_drop_mistake;
+                carry_sprite = spr_cooked_mistake;
+            }else if((pickup)and(place_meeting(x,y,obj_drop))){
             //cooking
-            if((pickup)and(place_meeting(x,y,obj_drop))){
                 var drop_inst = instance_nearest(x,y,obj_drop);
                 
                 player_state = "state_recipe";
+                recipe_item_1 = carry_sprite;
+                recipe_item_2 = drop_inst.sprite_index;
+                carry_inst = self;
                 alarm[0] = room_speed/2;
                 with(drop_inst){
                     instance_destroy();
                 };
-            }
+            }else if(pickup){
             //drop item
-            else if(pickup){
                 player_state = "state_walk";
+                audio_play_sound(snd_pickitem,10,0);
                 instance_create(x,y,carry_inst);
                 carry_inst = self;
             };
@@ -232,9 +245,11 @@ if!(game_is_paused()){
     if((place_meeting(x, y, obj_attack_enemy))and(can_take_damage)and(invincible_timer &lt;= 0)){
         var hurt_inst = instance_nearest(x,y,obj_attack_enemy);
         
+        audio_play_sound(snd_player_hurt,10,0);
         if(carry_inst != self){
             instance_create(x,y,carry_inst);
             carry_inst = self;
+            audio_play_sound(snd_pickitem,10,0);
         };
         player_state = "state_hurt";
         player_life--;
@@ -325,11 +340,28 @@ if(player_state == "state_recipe"){
         draw_sprite(spr_hud_result,recipe_success,(view_wview/2)+32,(view_hview/2)+16+result_offset);
         draw_set_alpha(1);
         
+        //draw recipe results
+        if(recipe_success){
+            scr_get_recipe_result(recipe_item_1,recipe_item_2);
+                
+            draw_sprite(carry_sprite,0,(view_wview/2)-12,(view_hview/2)+6);
+            draw_text((view_wview/2),(view_hview/2)-2,recipe_success_name);
+        }else{
+            scr_get_recipe_result(spr_cooked_mistake,spr_cooked_mistake);
+                
+            draw_sprite(carry_sprite,0,(view_wview/2)-12,(view_hview/2)+6);
+            draw_text((view_wview/2),(view_hview/2)-2,recipe_success_name);
+        };
+        
         //close the recipe minigame after another second has passed
         if(close_recipe_timer &gt; 0){
             close_recipe_timer--;
         }else{
-            player_state = "state_walk";
+            if(recipe_success){
+                player_state = "state_carry";
+            }else{
+                player_state = "state_walk";
+            };
             game_set_pause(false);
             finish_recipe = false;
             recipe_success = false;
@@ -489,12 +521,12 @@ if(player_state == "state_carry"){
     draw_sprite(carry_sprite,0,x,y-12);
 };
 
-//draw interact
+//draw interact for pickups
 if(place_meeting(x,y,obj_drop)){
     var drop_inst = instance_nearest(x,y,obj_drop);
     
     draw_sprite(spr_interact,0,drop_inst.x-8,drop_inst.y-32);
-    draw_text(drop_inst.x+16,drop_inst.y-32,"PICK UP");
+    draw_text(drop_inst.x+8,drop_inst.y-30,drop_inst.item_name);
 };
 </string>
           </argument>

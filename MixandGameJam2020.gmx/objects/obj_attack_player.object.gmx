@@ -82,6 +82,7 @@ if(player_inst.face_dir == "right"){
     }else if(player_inst.image_index &gt;= 2){
         x = spawn_x;
         y = spawn_y;
+        if!(audio_is_playing(snd_attack)){audio_play_sound(snd_attack,10,0)};
         draw_sprite(spr_player_pan_right,1,player_inst.x+3,player_inst.y);
         if!(dust_made){
             instance_create(x-6,y,obj_fx_dust)
@@ -97,6 +98,7 @@ if(player_inst.face_dir == "right"){
     }else if(player_inst.image_index &gt;= 2){
         x = spawn_x;
         y = spawn_y;
+        if!(audio_is_playing(snd_attack)){audio_play_sound(snd_attack,10,0)};
         draw_sprite(spr_player_pan_up,1,player_inst.x-2,player_inst.y-6);
         if!(dust_made){
             instance_create(x-8,y,obj_fx_dust)
@@ -112,6 +114,7 @@ if(player_inst.face_dir == "right"){
     }else if(player_inst.image_index &gt;= 2){
         x = spawn_x;
         y = spawn_y;
+        if!(audio_is_playing(snd_attack)){audio_play_sound(snd_attack,10,0)};
         draw_sprite(spr_player_pan_left,1,player_inst.x-20,player_inst.y);
         if!(dust_made){
             instance_create(x-4,y,obj_fx_dust)
@@ -127,6 +130,7 @@ if(player_inst.face_dir == "right"){
     }else if(player_inst.image_index &gt;= 2){
         x = spawn_x;
         y = spawn_y;
+        if!(audio_is_playing(snd_attack)){audio_play_sound(snd_attack,10,0)};
         draw_sprite(spr_player_pan_down,1,player_inst.x,player_inst.y+10);
         if!(dust_made){
             instance_create(x-4,y-6,obj_fx_dust)
