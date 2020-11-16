@@ -58,6 +58,12 @@
     </sprites>
     <sprites name="Cooked Foods">
       <sprite>sprites\spr_cooked_braised_carrot</sprite>
+      <sprite>sprites\spr_cooked_spaghetti</sprite>
+      <sprite>sprites\spr_cooked_salad</sprite>
+      <sprite>sprites\spr_cooked_ramen</sprite>
+      <sprite>sprites\spr_cooked_glaized_ham</sprite>
+      <sprite>sprites\spr_cooked_breakfast</sprite>
+      <sprite>sprites\spr_cooked_mistake</sprite>
     </sprites>
     <sprites name="NPC">
       <sprites name="Door">
@@ -65,11 +71,9 @@
         <sprite>sprites\spr_door_speaking</sprite>
         <sprite>sprites\spr_door_idle</sprite>
         <sprite>sprites\spr_open</sprite>
+        <sprite>sprites\spr_door_eat</sprite>
       </sprites>
     </sprites>
-    <sprite>sprites\spr_fx_dust</sprite>
-    <sprite>sprites\spr_fx_smokedust</sprite>
-    <sprite>sprites\spr_shadow</sprite>
     <sprites name="HUD">
       <sprite>sprites\spr_font_vwf_shadow</sprite>
       <sprite>sprites\spr_hud_portrait</sprite>
@@ -80,8 +84,11 @@
       <sprite>sprites\spr_hud_slider</sprite>
       <sprite>sprites\spr_hud_result</sprite>
       <sprite>sprites\spr_hud_recipe</sprite>
+      <sprite>sprites\spr_arrow</sprite>
     </sprites>
-    <sprite>sprites\spr_arrow</sprite>
+    <sprite>sprites\spr_fx_dust</sprite>
+    <sprite>sprites\spr_fx_smokedust</sprite>
+    <sprite>sprites\spr_shadow</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tileset</background>
@@ -92,6 +99,7 @@
   <scripts name="scripts">
     <script>scripts\game_is_paused.gml</script>
     <script>scripts\game_set_pause.gml</script>
+    <script>scripts\scr_get_recipe_result.gml</script>
   </scripts>
   <objects name="objects">
     <objects name="Debug">
@@ -105,14 +113,20 @@
     </objects>
     <objects name="Drops">
       <object>objects\obj_drop</object>
+      <object>objects\obj_drop_lifefruit</object>
       <object>objects\obj_drop_egg</object>
       <object>objects\obj_drop_noodle</object>
       <object>objects\obj_drop_carrot</object>
       <object>objects\obj_drop_honey</object>
       <object>objects\obj_drop_ham</object>
-      <object>objects\obj_drop_lifefruit</object>
       <object>objects\obj_drop_tomato</object>
       <object>objects\obj_drop_braised_carrot</object>
+      <object>objects\obj_drop_spaghetti</object>
+      <object>objects\obj_drop_salad</object>
+      <object>objects\obj_drop_ramen</object>
+      <object>objects\obj_drop_glaized_ham</object>
+      <object>objects\obj_drop_breakfast</object>
+      <object>objects\obj_drop_mistake</object>
     </objects>
     <objects name="Enemies">
       <object>objects\obj_attack_enemy</object>

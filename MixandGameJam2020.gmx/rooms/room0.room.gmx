@@ -16,7 +16,7 @@
   <clearDisplayBuffer>-1</clearDisplayBuffer>
   <makerSettings>
     <isSet>-1</isSet>
-    <w>1139</w>
+    <w>1118</w>
     <h>697</h>
     <showGrid>0</showGrid>
     <showObjects>-1</showObjects>
@@ -26,7 +26,7 @@
     <showViews>0</showViews>
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>-1</deleteUnderlyingTiles>
-    <page>0</page>
+    <page>2</page>
     <xoffset>-214</xoffset>
     <yoffset>-114</yoffset>
   </makerSettings>
@@ -141,13 +141,21 @@
     <instance objName="obj_solid" x="240" y="128" name="inst_6CC6D80B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_solid" x="224" y="80" name="inst_989EF1BA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_door" x="128" y="32" name="inst_D3626692" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy_slime" x="32" y="144" name="inst_76508680" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy_slime" x="32" y="80" name="inst_4275D848" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy_slime" x="144" y="112" name="inst_51048B5A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy_slime" x="160" y="160" name="inst_21D16342" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_drop_honey" x="80" y="112" name="inst_4A460B08" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_drop_honey" x="112" y="80" name="inst_8BF95F4D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_drop_braised_carrot" x="96" y="160" name="inst_5D0AAD97" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_egg" x="48" y="80" name="inst_6DEF4299" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_noodle" x="80" y="80" name="inst_EA71D14C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_carrot" x="112" y="80" name="inst_A1A1ABD4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_honey" x="144" y="80" name="inst_1DE4F577" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_ham" x="176" y="80" name="inst_127F8E66" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_tomato" x="208" y="80" name="inst_CB1D0E46" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_spaghetti" x="32" y="112" name="inst_045C3253" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_salad" x="64" y="112" name="inst_B0DAAB75" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_ramen" x="96" y="112" name="inst_99FF038D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_glaized_ham" x="128" y="112" name="inst_E9610998" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_breakfast" x="48" y="144" name="inst_0CDA01C8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_drop_mistake" x="208" y="112" name="inst_DDFE7BBD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="bg_tileset" x="32" y="48" w="16" h="16" xo="1" yo="35" id="10000011" name="inst_0D3D42C0" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -290,12 +298,12 @@
     <tile bgName="bg_tileset" x="80" y="32" w="16" h="16" xo="120" yo="18" id="10000483" name="inst_A77E0177" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_tileset" x="160" y="32" w="16" h="16" xo="120" yo="18" id="10000484" name="inst_8CC76BB7" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_tileset" x="192" y="32" w="16" h="16" xo="120" yo="18" id="10000485" name="inst_461C37BB" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_tileset" x="96" y="16" w="16" h="16" xo="52" yo="35" id="10000425" name="inst_B03953DC" depth="-10000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_tileset" x="96" y="0" w="16" h="16" xo="86" yo="1" id="10000426" name="inst_758DE13F" depth="-10000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_tileset" x="112" y="0" w="16" h="16" xo="1" yo="1" id="10000427" name="inst_08939DD2" depth="-10000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_tileset" x="128" y="0" w="16" h="16" xo="1" yo="1" id="10000428" name="inst_EB26533A" depth="-10000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_tileset" x="144" y="0" w="16" h="16" xo="103" yo="1" id="10000429" name="inst_7E612FA6" depth="-10000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_tileset" x="144" y="16" w="16" h="16" xo="69" yo="35" id="10000430" name="inst_4F6F4A17" depth="-10000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_tileset" x="96" y="16" w="16" h="16" xo="52" yo="35" id="10000486" name="inst_847863C4" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_tileset" x="144" y="16" w="16" h="16" xo="69" yo="35" id="10000487" name="inst_7258A05A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_tileset" x="144" y="0" w="16" h="16" xo="103" yo="1" id="10000488" name="inst_1AE98B1A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_tileset" x="96" y="0" w="16" h="16" xo="86" yo="1" id="10000489" name="inst_58BDD3D6" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_tileset" x="112" y="0" w="16" h="16" xo="1" yo="1" id="10000490" name="inst_B6C44882" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_tileset" x="128" y="0" w="16" h="16" xo="1" yo="1" id="10000491" name="inst_3E0DCCD1" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_tileset" x="160" y="16" w="16" h="16" xo="1" yo="1" id="10000431" name="inst_85AD0BE3" depth="-10000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_tileset" x="176" y="16" w="16" h="16" xo="1" yo="1" id="10000432" name="inst_3895294C" depth="-10000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_tileset" x="192" y="16" w="16" h="16" xo="1" yo="1" id="10000433" name="inst_42027488" depth="-10000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
