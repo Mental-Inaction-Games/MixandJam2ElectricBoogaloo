@@ -153,6 +153,7 @@
     <object>objects\obj_fx_dust</object>
     <object>objects\obj_mini_slider</object>
     <object>objects\obj_title</object>
+    <object>objects\obj_pressany</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
