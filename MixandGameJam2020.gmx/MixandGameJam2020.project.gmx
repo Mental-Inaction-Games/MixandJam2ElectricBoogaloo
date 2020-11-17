@@ -94,6 +94,10 @@
     <sprite>sprites\spr_fx_dust</sprite>
     <sprite>sprites\spr_fx_smokedust</sprite>
     <sprite>sprites\spr_shadow</sprite>
+    <sprites name="Title">
+      <sprite>sprites\spr_title</sprite>
+      <sprite>sprites\spr_pressany</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tileset</background>
@@ -148,10 +152,12 @@
     <object>objects\obj_door</object>
     <object>objects\obj_fx_dust</object>
     <object>objects\obj_mini_slider</object>
+    <object>objects\obj_title</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
     <room>rooms\room0</room>
+    <room>rooms\roomTitle</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
