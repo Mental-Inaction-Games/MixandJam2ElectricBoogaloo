@@ -26,7 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
+enemy_name = "Wing-mato";
 drop_item = obj_drop_tomato;
+z = 12;
+prev_dir = "Left";
+
+timer = 0;
+shift = 0;
 </string>
           </argument>
         </arguments>
@@ -55,14 +61,15 @@ right = 0;
 up = 0;
 down = 0;
 
-alarm[0] = room_speed;
+alarm[0] = 15;
 
 // Randomly choose direction and move based on obj_solid position
-var target_direction = choose("left","right","up","down");
+var target_direction = choose("left","right","up","down", prev_dir);
+    prev_dir = target_direction;
 
 if(target_direction == "left"){
     left = 1;
-    if(!place_meeting(x-16,y,obj_solid)){
+    if!(x - 16 &lt; 32){
         targetX = x - 16;
     } else {
         targetX = x;
@@ -72,7 +79,7 @@ if(target_direction == "left"){
 
 if(target_direction == "right"){
     right = 1;
-    if(!place_meeting(x+16,y,obj_solid)){
+    if!(x + 16 &gt; room_width-32){
         targetX = x + 16;  
     } else {
         targetX = x;
@@ -82,7 +89,7 @@ if(target_direction == "right"){
 
 if(target_direction == "up"){
     up = 1;
-    if(!place_meeting(x,y-16,obj_solid)){
+    if!(y - 16 &lt; 64){
     targetY = y - 16;
     } else {
         targetY = y;
@@ -92,7 +99,7 @@ if(target_direction == "up"){
 
 if(target_direction == "down"){
     down = 1;
-    if(!place_meeting(x,y+16,obj_solid)){
+    if~(y + 16 &gt; room_height-32){
         targetY = y + 16;
     } else {
         targetY = y;
@@ -109,6 +116,40 @@ if(target_direction == "down"){
 
 
 can_move = true;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if!(game_is_paused()){
+    if(willdie){
+        if(z &gt; 0){z --};
+    }else{
+        z = 12 + (2*sin(timer/8));
+        timer++;
+    };
+};
+
+image_speed = 0.125;
+event_inherited();
 
 </string>
           </argument>
