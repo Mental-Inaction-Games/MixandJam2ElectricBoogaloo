@@ -44,6 +44,8 @@
       <sprite>sprites\spr_chicken</sprite>
       <sprite>sprites\spr_slime</sprite>
       <sprite>sprites\spr_noodle</sprite>
+      <sprite>sprites\spr_noodle_1</sprite>
+      <sprite>sprites\spr_noodle_2</sprite>
       <sprite>sprites\spr_carrot</sprite>
       <sprite>sprites\spr_tomato</sprite>
       <sprites name="Hammy">
