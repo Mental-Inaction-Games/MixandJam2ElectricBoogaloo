@@ -28,11 +28,13 @@
             <string>event_inherited();
 enemy_name = "Wing-mato";
 drop_item = obj_drop_tomato;
+enemy_speed = 0.6;
 z = 12;
 prev_dir = "Left";
 
 timer = 0;
 shift = 0;
+
 </string>
           </argument>
         </arguments>
@@ -69,8 +71,8 @@ var target_direction = choose("left","right","up","down", prev_dir);
 
 if(target_direction == "left"){
     left = 1;
-    if!(x - 16 &lt; 32){
-        targetX = x - 16;
+    if!(x - 32 &lt; 32){
+        targetX = x - 32;
     } else {
         targetX = x;
         alarm[0] = 5;
@@ -79,8 +81,8 @@ if(target_direction == "left"){
 
 if(target_direction == "right"){
     right = 1;
-    if!(x + 16 &gt; room_width-32){
-        targetX = x + 16;  
+    if!(x + 32 &gt; room_width-32){
+        targetX = x + 32;  
     } else {
         targetX = x;
         alarm[0] = 5;
@@ -89,8 +91,8 @@ if(target_direction == "right"){
 
 if(target_direction == "up"){
     up = 1;
-    if!(y - 16 &lt; 64){
-    targetY = y - 16;
+    if!(y - 32 &lt; 48){
+    targetY = y - 32;
     } else {
         targetY = y;
         alarm[0] = 5;
@@ -99,8 +101,8 @@ if(target_direction == "up"){
 
 if(target_direction == "down"){
     down = 1;
-    if~(y + 16 &gt; room_height-32){
-        targetY = y + 16;
+    if~(y + 32 &gt; room_height-32){
+        targetY = y + 32;
     } else {
         targetY = y;
         alarm[0] = 5;
@@ -143,7 +145,7 @@ can_move = true;
     if(willdie){
         if(z &gt; 0){z --};
     }else{
-        z = 12 + (2*sin(timer/8));
+        z = 12+ (2*sin(timer/16));
         timer++;
     };
 };

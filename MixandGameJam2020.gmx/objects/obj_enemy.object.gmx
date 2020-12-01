@@ -28,6 +28,7 @@
             <string>///Enemy Initiate
 enemy_name = "test";
 drop_item = obj_drop_honey;
+instance_create(x,y,obj_fx_explosion);
 z = 0;
 willdie = false;
 
@@ -40,10 +41,11 @@ down = 0;
 
 vx = 0;
 vy = 0;
-enemy_speed = 1;
+enemy_speed = 0.4;
 alarm[0] = room_speed * 2;
 
 can_move = false;
+can_damage_player = true;
 targetX = 0;
 targetY = 0;
 
@@ -76,6 +78,7 @@ flash_state = 1;
             <string>///Instance Destroy
 
 //poof spoke when slime dies
+instance_create(x,y,obj_fx_explosion);
 for(a = 0;a &lt; 8;a++){
     instance_create(x + 8 + irandom_range(-8,8), y + irandom_range(-8,8), obj_fx_dust);
 };
@@ -215,7 +218,7 @@ if!(game_is_paused()){
         image_speed = 0.3;
         if(left){
             if(x &gt; targetX){
-                x -= 0.4;
+                x -= enemy_speed;
             }else{
                 x = targetX;
                 can_move = false;
@@ -223,7 +226,7 @@ if!(game_is_paused()){
         };
         if(right){
             if(x &lt; targetX){
-                x += 0.4;
+                x += enemy_speed;
             }else{
                 x = targetX;
                 can_move = false;
@@ -231,7 +234,7 @@ if!(game_is_paused()){
         };
         if(up){
             if(y &gt; targetY){
-                y -= 0.4;
+                y -= enemy_speed;
             }else{
                 y = targetY;
                 can_move = false;
@@ -239,7 +242,7 @@ if!(game_is_paused()){
         };
         if(down){
             if(y &lt; targetY){
-                y += 0.4;
+                y += enemy_speed;
             }else{
                 y = targetY;
                 can_move = false;
@@ -279,6 +282,7 @@ if!(game_is_paused()){
 if(place_meeting(x, y, obj_attack_player)){
     willdie = true;
     is_flashing = true;
+    can_damage_player = false;
     flashing_timer = 1;
     alarm[1] = room_speed/2;
     vy = lengthdir_y(1.5, point_direction(obj_player_mia.x, obj_player_mia.y, x, y))
