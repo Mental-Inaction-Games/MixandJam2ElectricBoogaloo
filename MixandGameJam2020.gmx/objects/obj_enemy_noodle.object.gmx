@@ -59,6 +59,8 @@ target_y = 16;
             <string>///Enemy Movement
 if!(willdie){
     if!(is_underground){
+        instance_create(x+2,y,obj_fx_dust_2);
+        instance_create(x+14,y,obj_fx_dust_2);
         is_underground = true;
         image_speed = 0.125;
         sprite_index = spr_noodle_1;
@@ -74,6 +76,8 @@ if!(willdie){
     }else{
         x = target_x;
         y = target_y;
+        instance_create(x+2,y,obj_fx_dust_2);
+        instance_create(x+14,y,obj_fx_dust_2);
         
         is_underground = false
         image_speed = 0.125;
@@ -84,69 +88,6 @@ if!(willdie){
     };
 
 };
-/*
-left = 0;
-right = 0;
-up = 0;
-down = 0;
-
-
-
-// Randomly choose direction and move based on obj_solid position
-
-var target_direction = choose("left","right","up","down");
-
-if(target_direction == "left"){
-    left = 1;
-    if(!place_meeting(x-16,y,obj_solid)){
-        targetX = x - 16;
-    } else {
-        targetX = x;
-        alarm[0] = 5;
-    }  
-}
-
-if(target_direction == "right"){
-    right = 1;
-    if(!place_meeting(x+16,y,obj_solid)){
-        targetX = x + 16;  
-    } else {
-        targetX = x;
-        alarm[0] = 5;
-    }    
-}
-
-if(target_direction == "up"){
-    up = 1;
-    if(!place_meeting(x,y-16,obj_solid)){
-    targetY = y - 16;
-    } else {
-        targetY = y;
-        alarm[0] = 5;
-    }
-}
-
-if(target_direction == "down"){
-    down = 1;
-    if(!place_meeting(x,y+16,obj_solid)){
-        targetY = y + 16;
-    } else {
-        targetY = y;
-        alarm[0] = 5;
-    }
-    
-}
-
-//vx = (right - left) * enemy_speed;
-//vy = (down - up) * enemy_speed;
-
-
-
-
-
-can_move = true;
-*/
-
 </string>
           </argument>
         </arguments>
@@ -175,6 +116,7 @@ can_move = true;
 if((place_meeting(x, y, obj_attack_player))and!(is_underground)){
     willdie = true;
     is_flashing = true;
+    can_damage_player = false;
     flashing_timer = 1;
     alarm[1] = room_speed/2;
     vy = lengthdir_y(1.5, point_direction(obj_player_mia.x, obj_player_mia.y, x, y))

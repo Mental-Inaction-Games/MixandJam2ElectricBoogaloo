@@ -159,7 +159,7 @@ if!(game_is_paused()){
             break;
             
         case "state_attack":
-            can_take_damage = true;
+            can_take_damage = false;
             if(attack_timer &gt; 0){
                 //create attack object after certain frame
                 //if((attack_timer &lt; attack_timer_max - 12)and!(instance_exists(obj_attack_player))){
@@ -245,22 +245,24 @@ if!(game_is_paused()){
     if((place_meeting(x, y, obj_attack_enemy))and(can_take_damage)and(invincible_timer &lt;= 0)){
         var hurt_inst = instance_nearest(x,y,obj_attack_enemy);
         
-        audio_play_sound(snd_player_hurt,10,0);
-        if(carry_inst != self){
-            instance_create(x,y,carry_inst);
-            carry_inst = self;
-            audio_play_sound(snd_pickitem,10,0);
-        };
-        player_state = "state_hurt";
-        player_life--;
-        flashing_timer = 1;
-        hurt_timer = 20;
-        vy = lengthdir_y(2, point_direction(hurt_inst.x, hurt_inst.y, x, y))
-        vx = lengthdir_x(2, point_direction(hurt_inst.x, hurt_inst.y, x, y))
-        
-        //die
-        if(player_life &lt;= 0){
-            game_end();
+        if(hurt_inst.can_damage_player == true){
+            audio_play_sound(snd_player_hurt,10,0);
+            if(carry_inst != self){
+                instance_create(x,y,carry_inst);
+                carry_inst = self;
+                audio_play_sound(snd_pickitem,10,0);
+            };
+            player_state = "state_hurt";
+            player_life--;
+            flashing_timer = 1;
+            hurt_timer = 20;
+            vy = lengthdir_y(2, point_direction(hurt_inst.x, hurt_inst.y, x, y))
+            vx = lengthdir_x(2, point_direction(hurt_inst.x, hurt_inst.y, x, y))
+            
+            //die
+            if(player_life &lt;= 0){
+                game_end();
+            };
         };
     };
     
