@@ -164,7 +164,6 @@ can_move = true;
 
 if(game_is_paused()){
     alarm[0]++;
-    alarm[1]++;
 };
 </string>
           </argument>

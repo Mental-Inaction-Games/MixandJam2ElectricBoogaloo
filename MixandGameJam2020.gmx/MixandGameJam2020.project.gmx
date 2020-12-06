@@ -42,7 +42,6 @@
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\spr_slime</sprite>
-      <sprite>sprites\spr_chicken</sprite>
       <sprite>sprites\spr_tomato</sprite>
       <sprites name="Hammy">
         <sprite>sprites\spr_hammy_front</sprite>
@@ -58,6 +57,10 @@
         <sprite>sprites\spr_carrot</sprite>
         <sprite>sprites\spr_carrot_aim</sprite>
         <sprite>sprites\spr_carrot_shot</sprite>
+      </sprites>
+      <sprites name="Chicken">
+        <sprite>sprites\spr_chicken</sprite>
+        <sprite>sprites\spr_chicken_lay</sprite>
       </sprites>
     </sprites>
     <sprites name="Drops">
@@ -107,6 +110,7 @@
       <sprite>sprites\spr_pressany</sprite>
     </sprites>
     <sprite>sprites\spr_fx_explosion</sprite>
+    <sprite>sprites\spr_fx_explosion_egg</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tileset</background>
@@ -163,6 +167,7 @@
     <object>objects\obj_fx_dust</object>
     <object>objects\obj_fx_dust_2</object>
     <object>objects\obj_fx_explosion</object>
+    <object>objects\obj_fx_explosion_egg</object>
     <object>objects\obj_mini_slider</object>
     <object>objects\obj_title</object>
     <object>objects\obj_pressany</object>
