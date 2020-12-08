@@ -32,6 +32,7 @@ enemy_speed = 0.6;
 
 lay_counter = choose(4,5);
 is_laying_egg = false;
+prev_dir = "left";
 </string>
           </argument>
         </arguments>
@@ -63,8 +64,9 @@ down = 0;
 alarm[0] = room_speed;
     
 if!(is_laying_egg){
-    // Randomly choose direction and move based on obj_solid position
-    var target_direction = choose("left","right","up","down");
+    // Randomly choose direction and move based on obj_solid position. More likely to move in the last direction chosen
+    var target_direction = choose("left","right","up","down",prev_dir);
+    
     
     if(target_direction == "left"){
         left = 1;
@@ -111,9 +113,7 @@ if!(is_laying_egg){
     //vy = (down - up) * enemy_speed;
     
     
-    
-    
-    
+    prev_dir = target_direction;
     can_move = true;
 }else{
     can_move = true;

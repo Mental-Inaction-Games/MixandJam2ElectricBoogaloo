@@ -20,9 +20,9 @@
   <width>16</width>
   <height>16</height>
   <frames>
-    <frame index="0">images\spr_hammy_side_0.png</frame>
-    <frame index="1">images\spr_hammy_side_1.png</frame>
-    <frame index="2">images\spr_hammy_side_2.png</frame>
-    <frame index="3">images\spr_hammy_side_3.png</frame>
+    <frame index="0">images\spr_hammy_side_2_0.png</frame>
+    <frame index="1">images\spr_hammy_side_2_1.png</frame>
+    <frame index="2">images\spr_hammy_side_2_2.png</frame>
+    <frame index="3">images\spr_hammy_side_2_3.png</frame>
   </frames>
 </sprite>
