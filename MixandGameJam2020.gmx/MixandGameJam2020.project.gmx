@@ -64,6 +64,15 @@
         <sprite>sprites\spr_chicken</sprite>
         <sprite>sprites\spr_chicken_lay</sprite>
       </sprites>
+      <sprites name="Spawners">
+        <sprite>sprites\spr_spawner_slime</sprite>
+        <sprite>sprites\spr_spawner_tomato</sprite>
+        <sprite>sprites\spr_spawner_noodle</sprite>
+        <sprite>sprites\spr_spawner_chicken</sprite>
+        <sprite>sprites\spr_spawner_carrot</sprite>
+        <sprite>sprites\spr_spawner_hammy</sprite>
+        <sprite>sprites\spr_spawner_custom</sprite>
+      </sprites>
     </sprites>
     <sprites name="Drops">
       <sprite>sprites\spr_carrot_drop</sprite>
@@ -104,15 +113,17 @@
       <sprite>sprites\spr_hud_recipe</sprite>
       <sprite>sprites\spr_arrow</sprite>
     </sprites>
-    <sprite>sprites\spr_fx_dust</sprite>
-    <sprite>sprites\spr_fx_smokedust</sprite>
-    <sprite>sprites\spr_shadow</sprite>
     <sprites name="Title">
       <sprite>sprites\spr_title</sprite>
       <sprite>sprites\spr_pressany</sprite>
     </sprites>
-    <sprite>sprites\spr_fx_explosion</sprite>
-    <sprite>sprites\spr_fx_explosion_egg</sprite>
+    <sprites name="FX">
+      <sprite>sprites\spr_shadow</sprite>
+      <sprite>sprites\spr_fx_dust</sprite>
+      <sprite>sprites\spr_fx_smokedust</sprite>
+      <sprite>sprites\spr_fx_explosion</sprite>
+      <sprite>sprites\spr_fx_explosion_egg</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tileset</background>
@@ -163,17 +174,30 @@
       <object>objects\obj_enemy_chicken</object>
       <object>objects\obj_enemy_hammy</object>
     </objects>
+    <objects name="Enemy Spawners">
+      <object>objects\obj_enemy_spawner</object>
+      <object>objects\obj_spawner_slime</object>
+      <object>objects\obj_spawner_tomato</object>
+      <object>objects\obj_spawner_noodle</object>
+      <object>objects\obj_spawner_chicken</object>
+      <object>objects\obj_spawner_carrot</object>
+      <object>objects\obj_spawner_hammy</object>
+    </objects>
+    <objects name="FX">
+      <object>objects\obj_fx_dust</object>
+      <object>objects\obj_fx_dust_2</object>
+      <object>objects\obj_fx_explosion_egg</object>
+      <object>objects\obj_fx_explosion</object>
+    </objects>
+    <objects name="Menus &amp; Title">
+      <object>objects\obj_title</object>
+      <object>objects\obj_mini_slider</object>
+      <object>objects\obj_pressany</object>
+    </objects>
     <object>objects\obj_player_mia</object>
     <object>objects\obj_attack_player</object>
     <object>objects\obj_solid</object>
     <object>objects\obj_door</object>
-    <object>objects\obj_fx_dust</object>
-    <object>objects\obj_fx_dust_2</object>
-    <object>objects\obj_fx_explosion</object>
-    <object>objects\obj_fx_explosion_egg</object>
-    <object>objects\obj_mini_slider</object>
-    <object>objects\obj_title</object>
-    <object>objects\obj_pressany</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>

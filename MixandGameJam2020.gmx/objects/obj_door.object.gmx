@@ -28,6 +28,8 @@
             <string>///Initialize Door
 
 image_speed = 0.25;
+times_to_feed = 3;
+processed_feed = false;
 door_state = "state_waiting";
 interact_text = "Speak";
 
@@ -63,6 +65,9 @@ food_given = spr_cooked_mistake;
         case "state_waiting":
             interact_text = "Speak";
             if((place_meeting(x,y+24,obj_player_mia))and(keyboard_check_pressed(ord("X")))){
+                with(obj_enemy_spawner){
+                    can_spawn = true;
+                };
                 door_state = "state_hungry";
                 desired_food = choose(spr_cooked_braised_carrot,spr_cooked_spaghetti,spr_cooked_salad,spr_cooked_ramen,spr_cooked_glaized_ham,spr_cooked_breakfast);
             };
@@ -103,9 +108,19 @@ food_given = spr_cooked_mistake;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(sprite_index == spr_door_eat){
+            <string>if((sprite_index == spr_door_eat)or(sprite_index == spr_open)){
     if(food_given == desired_food){
         audio_play_sound(snd_success,10,0);
+        if(times_to_feed &lt;= 0){
+            with(obj_enemy_spawner){
+                can_spawn = false;
+            };
+            with(obj_enemy){
+                willdie = true;
+                alarm[1] = room_speed/2;
+            };
+            instance_destroy();
+        };
     }else{
         audio_play_sound(snd_failure,10,0);
     };
@@ -204,10 +219,25 @@ var door_collide = place_meeting(x, y + 32, obj_player_mia);
 
 if!(game_is_paused()){
     if(door_state == "state_eating"){
-        sprite_index = spr_door_eat;
-        image_speed = 0.15;
+        if(food_given == desired_food){
+            if!(processed_feed){
+                processed_feed = true;
+                times_to_feed--;
+            };
+            if(times_to_feed &lt;= 0){
+                sprite_index = spr_open;
+                image_speed = 0.15;
+            }else{
+                sprite_index = spr_door_eat;
+                image_speed = 0.10;
+            };
+        }else{
+            sprite_index = spr_door_eat;
+            image_speed = 0.10;
+        };
     ///When player is near change sprite
     }else if(door_collide){
+        processed_feed = false;
         image_speed = 0.15;
         sprite_index = spr_door_speaking;
         
@@ -216,7 +246,8 @@ if!(game_is_paused()){
             draw_sprite(spr_interact,0,x-24,y-12);
             draw_text(x-8,y-12,interact_text);
         };
-    }else{
+    }else{  
+        processed_feed = false;
         image_speed = 0.08;
         sprite_index = spr_door_idle;
     };
