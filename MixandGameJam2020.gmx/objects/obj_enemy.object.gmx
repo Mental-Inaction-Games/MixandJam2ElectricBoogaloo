@@ -32,7 +32,7 @@ instance_create(x,y,obj_fx_explosion);
 z = 0;
 willdie = false;
 
-image_speed = 0.25;
+anim_speed = 0.3;
 
 left = 0;
 right = 0;
@@ -215,7 +215,7 @@ can_move = true;
             <string>///Enemy Step Movement
 if!(game_is_paused()){
     if(can_move == true &amp;&amp; willdie = false){
-        image_speed = 0.3;
+        image_speed = anim_speed;
         if(left){
             if(x &gt; targetX){
                 x -= enemy_speed;
