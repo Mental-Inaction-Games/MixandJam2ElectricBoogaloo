@@ -192,7 +192,7 @@
     <objects name="Menus &amp; Title">
       <object>objects\obj_title</object>
       <object>objects\obj_mini_slider</object>
-      <object>objects\obj_pressany</object>
+      <object>objects\obj_pressany_fadein</object>
     </objects>
     <object>objects\obj_player_mia</object>
     <object>objects\obj_attack_player</object>
