@@ -31,6 +31,12 @@ enemy_to_spawn_2 = obj_enemy_tomato;
 can_spawn = false;
 respawn_timer_max = 180;
 respawn_timer = respawn_timer_max;
+
+spinner_x = x+8;
+spinner_y = y+8;
+spinner_angle = 0;
+spinner_speed = 0.5;
+//spinner_accel += 0.5;
 </string>
           </argument>
         </arguments>
@@ -57,9 +63,24 @@ respawn_timer = respawn_timer_max;
     if((can_spawn)and!(place_meeting(x,y,obj_player_mia))){
         if((instance_spawned == self) or !(instance_exists(instance_spawned))){
             if(respawn_timer &lt;= 0){
-                respawn_timer = respawn_timer_max;
+                spinner_speed = 0.5;
+                respawn_timer = respawn_timer_max + choose(-60,0,60);
                 instance_spawned = instance_create(x,y+16,choose(enemy_to_spawn_1,enemy_to_spawn_2));
             }else{
+                //spinning dust animation
+              
+                spinner_speed += 0.1;
+                
+                if(spinner_angle &lt; 360){
+                    spinner_angle += spinner_speed;
+                }else{
+                    spinner_angle = 0;
+                };
+                spinner_x = x + 8 + lengthdir_x(8,spinner_angle);
+                spinner_y = y + 8 + lengthdir_y(8,spinner_angle);
+                if(random(1) &lt; 0.25){
+                    instance_create(spinner_x,spinner_y,obj_fx_spawn_spinner);
+                };
                 respawn_timer--;
             };
         };

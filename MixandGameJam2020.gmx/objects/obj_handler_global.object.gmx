@@ -28,6 +28,8 @@
             <string>game_paused = 0;//display the pause screen
 debug_active = 0;//self explanatory
 use_fullscreen = false;
+
+pause_alpha = 0;
 </string>
           </argument>
         </arguments>
@@ -119,12 +121,21 @@ alarm[0] = 1;///&lt;- This just tells the window to center at the start of the n
             <string>draw_text(0,0,"FPS:" + string(fps));
 if(game_is_paused()){
     draw_set_color(c_black);
-    draw_set_alpha(0.75);
-    draw_rectangle(0,0,view_wview,view_hview,0);
-    draw_set_alpha(1);
-    draw_set_color(c_white);
-    draw_text((view_wview/2)-16,view_hview/2,"PAUSED");
+    if(pause_alpha &lt; 0.5){
+        pause_alpha += 0.05;
+    };
+    // draw_text((view_wview/2)-16,view_hview/2,"PAUSED");
+}else{
+    draw_set_color(c_dkgray);
+    if(pause_alpha &gt; 0){
+        pause_alpha -= 0.05;
+    };
 };
+
+draw_set_alpha(pause_alpha);
+draw_rectangle(0,0,view_wview,view_hview,0);
+draw_set_alpha(1);
+draw_set_color(c_white);
 </string>
           </argument>
         </arguments>

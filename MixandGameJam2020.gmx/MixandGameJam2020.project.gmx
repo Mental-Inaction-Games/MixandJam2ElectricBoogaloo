@@ -19,21 +19,37 @@
     <sprite>sprites\sprite2</sprite>
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_player</sprite>
+    <sprite>sprites\spr_exit</sprite>
     <sprite>sprites\spr_block</sprite>
     <sprites name="Player Mia">
       <sprite>sprites\spr_player_mia</sprite>
-      <sprite>sprites\spr_player_mia_stand_up</sprite>
-      <sprite>sprites\spr_player_mia_stand_down</sprite>
-      <sprite>sprites\spr_player_mia_stand_left</sprite>
-      <sprite>sprites\spr_player_mia_stand_right</sprite>
-      <sprite>sprites\spr_player_mia_walk_up</sprite>
-      <sprite>sprites\spr_player_mia_walk_down</sprite>
-      <sprite>sprites\spr_player_mia_walk_left</sprite>
-      <sprite>sprites\spr_player_mia_walk_right</sprite>
-      <sprite>sprites\spr_player_mia_attack_up</sprite>
-      <sprite>sprites\spr_player_mia_attack_down</sprite>
-      <sprite>sprites\spr_player_mia_attack_left</sprite>
-      <sprite>sprites\spr_player_mia_attack_right</sprite>
+      <sprite>sprites\spr_player_mia_climb</sprite>
+      <sprites name="Standing">
+        <sprite>sprites\spr_player_mia_stand_up</sprite>
+        <sprite>sprites\spr_player_mia_stand_down</sprite>
+        <sprite>sprites\spr_player_mia_stand_left</sprite>
+        <sprite>sprites\spr_player_mia_stand_right</sprite>
+      </sprites>
+      <sprites name="Walking">
+        <sprite>sprites\spr_player_mia_walk_up</sprite>
+        <sprite>sprites\spr_player_mia_walk_down</sprite>
+        <sprite>sprites\spr_player_mia_walk_left</sprite>
+        <sprite>sprites\spr_player_mia_walk_right</sprite>
+      </sprites>
+      <sprites name="Attack">
+        <sprite>sprites\spr_player_mia_attack_up</sprite>
+        <sprite>sprites\spr_player_mia_attack_down</sprite>
+        <sprite>sprites\spr_player_mia_attack_left</sprite>
+        <sprite>sprites\spr_player_mia_attack_right</sprite>
+      </sprites>
+      <sprites name="Hurt">
+        <sprite>sprites\spr_player_mia_hurt_up</sprite>
+        <sprite>sprites\spr_player_mia_hurt_down</sprite>
+        <sprite>sprites\spr_player_mia_hurt_left</sprite>
+        <sprite>sprites\spr_player_mia_hurt_right</sprite>
+        <sprite>sprites\spr_player_mia_die</sprite>
+        <sprite>sprites\spr_player_mia_die_2</sprite>
+      </sprites>
       <sprite>sprites\spr_player_pan_up</sprite>
       <sprite>sprites\spr_player_pan_down</sprite>
       <sprite>sprites\spr_player_pan_left</sprite>
@@ -112,10 +128,13 @@
       <sprite>sprites\spr_hud_result</sprite>
       <sprite>sprites\spr_hud_recipe</sprite>
       <sprite>sprites\spr_arrow</sprite>
+      <sprite>sprites\spr_hud_orderup</sprite>
     </sprites>
     <sprites name="Title">
       <sprite>sprites\spr_title</sprite>
       <sprite>sprites\spr_pressany</sprite>
+      <sprite>sprites\spr_title_logo</sprite>
+      <sprite>sprites\spr_title_sparkle</sprite>
     </sprites>
     <sprites name="FX">
       <sprite>sprites\spr_shadow</sprite>
@@ -123,10 +142,12 @@
       <sprite>sprites\spr_fx_smokedust</sprite>
       <sprite>sprites\spr_fx_explosion</sprite>
       <sprite>sprites\spr_fx_explosion_egg</sprite>
+      <sprite>sprites\spr_fx_sparkle</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tileset</background>
+    <background>background\bg_gameover</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\path_slider</path>
@@ -188,6 +209,7 @@
       <object>objects\obj_fx_dust_2</object>
       <object>objects\obj_fx_explosion_egg</object>
       <object>objects\obj_fx_explosion</object>
+      <object>objects\obj_fx_spawn_spinner</object>
     </objects>
     <objects name="Menus &amp; Title">
       <object>objects\obj_title</object>
@@ -198,10 +220,13 @@
     <object>objects\obj_attack_player</object>
     <object>objects\obj_solid</object>
     <object>objects\obj_door</object>
+    <object>objects\obj_player_spawn</object>
+    <object>objects\obj_level_exit</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
     <room>rooms\room0</room>
+    <room>rooms\room3</room>
     <room>rooms\roomTitle</room>
   </rooms>
   <help>

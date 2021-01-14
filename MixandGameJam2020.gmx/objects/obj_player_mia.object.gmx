@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>-10</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -37,8 +37,8 @@ face_dir = "down"; //used to keep track of which of the 4 directional sprites th
 attack_timer = 0;
 attack_timer_max = 30;
 
-player_life = 3;
-player_life_max = 3;
+player_life = 4;
+player_life_max = 4;
 can_take_damage = true;
 hurt_timer = 0;
 carry_inst = self;
@@ -48,6 +48,8 @@ is_flashing = false;
 flashing_timer = 0;
 flash_state = 1;
 invincible_timer = 0;
+can_climb_stairs = false;
+draw_shadow = true;
 
 finish_recipe = false;
 recipe_success = false;
@@ -60,6 +62,10 @@ last_enemy_sprite = spr_enemy;
 recipe_item_1 = sprite_index;
 recipe_item_2 = sprite_index;
 recipe_success_name = "Test";
+
+//death state
+death_bar_left_x = 0;
+death_bar_right_x = 0;
 </string>
           </argument>
         </arguments>
@@ -126,6 +132,7 @@ if!(game_is_paused()){
     switch(player_state){
         case "state_walk":
             can_take_damage = true;
+            can_climb_stairs = true;
             //set x and y velocity according to player inputs
             vx = (right - left) * player_speed;
             vy = (down - up) * player_speed;
@@ -160,6 +167,7 @@ if!(game_is_paused()){
             
         case "state_attack":
             can_take_damage = false;
+            can_climb_stairs = false;
             if(attack_timer &gt; 0){
                 //create attack object after certain frame
                 //if((attack_timer &lt; attack_timer_max - 12)and!(instance_exists(obj_attack_player))){
@@ -180,14 +188,21 @@ if!(game_is_paused()){
             
         case "state_hurt":
             can_take_damage = false;
+            can_climb_stairs = false;
             is_flashing = true;
+            view_xview = choose(-0.5,0,0.5);
+            view_yview = choose(-0.5,0,0.5);
+            
             if(hurt_timer &gt; 0){
                 hurt_timer--;
+                vx = lerp(0,vx,0.95);
+                vy = lerp(0,vy,0.95);
             }else{
                 player_state = "state_walk";
-                is_flashing = false;
+                view_xview = 0;
+                view_yview = 0;
+                //is_flashing = false;
                 flash_state = 1;
-                invincible_timer = 30;
                 vx = 0;
                 vy = 0;
             };
@@ -195,6 +210,7 @@ if!(game_is_paused()){
             
         case "state_carry":
             can_take_damage = true;
+            can_climb_stairs = true;
             //set x and y velocity according to player inputs
             vx = (right - left) * player_speed;
             vy = (down - up) * player_speed;
@@ -210,7 +226,7 @@ if!(game_is_paused()){
                 obj_door.door_state = "state_eating";
                 obj_door.food_given = carry_sprite;
                 player_state = "state_walk";
-                carry_inst = obj_drop_mistake;
+                carry_inst = self;
                 carry_sprite = spr_cooked_mistake;
             }else if((pickup)and(place_meeting(x,y,obj_drop))){
             //cooking
@@ -236,11 +252,36 @@ if!(game_is_paused()){
         case "state_recipe":
             game_set_pause(true);
             break;
+            
+        case "state_dead":
+            can_climb_stairs = false;
+            game_set_pause(true);
+            vx = 0;
+            vy = 0;
+            break;
+            
+        case "state_climb":
+            can_climb_stairs = false;
+            vx = 0;
+            vy = -0.06;
+            break;
+    };
+    
+    //climb exit stairs
+    if((can_climb_stairs)and(place_meeting(x,y,obj_level_exit))){
+        x = obj_level_exit.x;
+        y = obj_level_exit.y;
+        player_state = "state_climb";
+        image_index = 0;
     };
     
     //taking damage
     if((can_take_damage)and(invincible_timer &gt; 0)){
         invincible_timer--;
+    };
+    if((is_flashing)and(invincible_timer == 0)){
+        is_flashing = false;
+        flash_state = 1;
     };
     if((place_meeting(x, y, obj_attack_enemy))and(can_take_damage)and(invincible_timer &lt;= 0)){
         var hurt_inst = instance_nearest(x,y,obj_attack_enemy);
@@ -256,12 +297,15 @@ if!(game_is_paused()){
             player_life--;
             flashing_timer = 1;
             hurt_timer = 20;
+            invincible_timer = 60;
             vy = lengthdir_y(2, point_direction(hurt_inst.x, hurt_inst.y, x, y))
             vx = lengthdir_x(2, point_direction(hurt_inst.x, hurt_inst.y, x, y))
             
             //die
             if(player_life &lt;= 0){
-                game_end();
+                player_state = "state_dead";
+                death_bar_left_x = round((x - room_width));
+                death_bar_right_x = round((x + room_width));
             };
         };
     };
@@ -294,6 +338,57 @@ if!(game_is_paused()){
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(player_state == "state_climb"){
+    player_state  = "state_walk";
+    player_life = player_life_max;
+    room = obj_level_exit.warp_room;
+};
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>x = obj_player_spawn.x;
+y = obj_player_spawn.y;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -314,6 +409,19 @@ if!(game_is_paused()){
             <string>//draw last enemy defeated
 draw_sprite(last_enemy_sprite,0,4,view_hview-4);
 draw_text(20,view_hview-14,last_enemy_name);
+
+//draw hud portrait
+draw_sprite(spr_hud_portrait,(player_state == "state_hurt"),8,8);
+
+//draw lifebar
+for(a = 0;a &lt; player_life_max;a++){
+    draw_sprite(spr_hud_lifefruit,1, 40+(a*16),16);
+};
+player_life = clamp(player_life,0,player_life_max);
+
+for(a = 0;a &lt; player_life;a++){
+    draw_sprite(spr_hud_lifefruit,0, 40+(a*16),16)
+};    
 
 //draw the recipe minigame screen
 if(player_state == "state_recipe"){
@@ -374,18 +482,57 @@ if(player_state == "state_recipe"){
         };
     };
     draw_sprite(spr_hud_pot,0,(view_wview/2)+pot_offset,(view_hview/2)+16);
-    draw_sprite(spr_hud_minigame,0,view_wview/2,(view_hview/2)+40);
-};
+    draw_sprite(spr_hud_minigame,0,view_wview/2,(view_hview/2)+40);  
 
-draw_sprite(spr_hud_portrait,(player_state == "state_hurt"),8,8);
-
-for(a = 0;a &lt; player_life_max;a++){
-    draw_sprite(spr_hud_lifefruit,1, 40+(a*16),16);
-};
-player_life = clamp(player_life,0,player_life_max);
-
-for(a = 0;a &lt; player_life;a++){
-    draw_sprite(spr_hud_lifefruit,0, 40+(a*16),16)
+//draw gui when player is dead
+}else if(player_state == "state_dead"){
+    draw_set_color(c_black);
+    draw_rectangle(-room_width,0,death_bar_left_x,room_height,0);
+    draw_rectangle(death_bar_right_x,0,room_width*2,room_height,0);
+    
+    draw_set_color(c_white);
+    draw_sprite_ext(sprite_index,image_index,round(x),round(y),image_xscale,image_yscale,image_angle,image_blend,1);
+    
+    //Black bars come in from the sides
+    if!(death_bar_left_x &gt; death_bar_right_x){
+        death_bar_left_x += 2;
+        death_bar_right_x -= 2;
+        
+        //RIGHT
+        if(face_dir == "right"){
+            sprite_index = spr_player_mia_hurt_right;
+            direction = 0;
+        //UP
+        }else if(face_dir == "up"){
+            sprite_index = spr_player_mia_hurt_up;
+            direction = 90;
+        //LEFT
+        }else if(face_dir == "left"){
+            sprite_index = spr_player_mia_hurt_left;
+            direction = 180;
+        //DOWN
+        }else if(face_dir == "down"){
+            sprite_index = spr_player_mia_hurt_down;
+            direction = 270;
+        };
+    //player spins and falls down
+    }else if(sprite_index != spr_player_mia_die_2){
+        sprite_index = spr_player_mia_die;
+        if(image_index &lt; 15){
+            image_index += 0.15;
+        }else{
+            sprite_index = spr_player_mia_die_2;
+            background_visible[1] = true;
+            background_alpha[1] = 0;
+        };
+    //game over appears with menu
+    }else{
+        if(background_alpha[1] &lt; 1){
+            background_alpha[1] += 0.01;       
+        };
+        draw_background_ext(bg_gameover,background_x[1],background_y[1],1,1,0,c_white,background_alpha[1]);
+        
+    };
 };
 </string>
           </argument>
@@ -413,9 +560,10 @@ for(a = 0;a &lt; player_life;a++){
     //finite state machine
     switch(player_state){
         case "state_walk":
+            draw_shadow = true;
             //sprites to use when moving
             if((left)or(up)or(right)or(down)){
-                image_speed = 0.15;
+                image_speed = 0.125;
                 //RIGHT
                 if(direction == 0){
                     sprite_index = spr_player_mia_walk_right;face_dir = "right";
@@ -428,6 +576,22 @@ for(a = 0;a &lt; player_life;a++){
                 //DOWN
                 }else if(direction == 270){
                     sprite_index = spr_player_mia_walk_down;face_dir = "down";
+                }else{
+                //MOVING IN A DIAGONAL DIRECTION
+                //This is to fix the walking backwards bug
+                    //RIGHT
+                    if((face_dir == "right")and(abs(angle_difference(0,direction)) &gt;= 135)){
+                        sprite_index = spr_player_mia_walk_left;face_dir = "left";
+                    //UP
+                    }else if((face_dir == "up")and(abs(angle_difference(90,direction)) &gt;= 135)){
+                        sprite_index = spr_player_mia_walk_down;face_dir = "down";
+                    //LEFT
+                    }else if((face_dir == "left")and(abs(angle_difference(180,direction)) &gt;= 135)){
+                        sprite_index = spr_player_mia_walk_right;face_dir = "right";
+                    //DOWN
+                    }else if((face_dir == "down")and(abs(angle_difference(270,direction)) &gt;= 135)){
+                        sprite_index = spr_player_mia_walk_up;face_dir = "up";
+                    };
                 };
             //sprites to use while standing still
             }else{
@@ -449,6 +613,7 @@ for(a = 0;a &lt; player_life;a++){
             break;
             
         case "state_attack":
+            draw_shadow = true;
             //stop the animation before it loops
             if(image_index &lt; image_number){
                 image_speed = 0.15;
@@ -475,7 +640,30 @@ for(a = 0;a &lt; player_life;a++){
             };
             break;
             
+     case "state_hurt":
+     case "state_dead":
+           draw_shadow = true;
+           //RIGHT
+            if(face_dir == "right"){
+                sprite_index = spr_player_mia_hurt_right;
+                direction = 0;
+            //UP
+            }else if(face_dir == "up"){
+                sprite_index = spr_player_mia_hurt_up;
+                direction = 90;
+            //LEFT
+            }else if(face_dir == "left"){
+                sprite_index = spr_player_mia_hurt_left;
+                direction = 180;
+            //DOWN
+            }else if(face_dir == "down"){
+                sprite_index = spr_player_mia_hurt_down;
+                direction = 270;
+            };
+            break;
+            
     case "state_carry":
+            draw_shadow = true;
             //sprites to use when moving
             if((left)or(up)or(right)or(down)){
                 image_speed = 0.15;
@@ -510,13 +698,26 @@ for(a = 0;a &lt; player_life;a++){
                 };
             };
             break;
+            
+        case "state_climb":
+            draw_shadow = false;
+            sprite_index = spr_player_mia_climb;
+            image_speed = 0.075;
+            break;
     };
 }else{
     image_speed = 0;
 };
 
 //draw player sprite
-draw_sprite_ext(sprite_index,image_index,round(x),round(y),image_xscale,image_yscale,image_angle,image_blend,flash_state);
+if(draw_shadow){
+    draw_sprite(spr_shadow,1,round(x),round(y)+2);
+};
+draw_sprite_ext(sprite_index,image_index,round(x),round(y),image_xscale,image_yscale,image_angle,image_blend,1);
+if(flash_state == 0){
+    draw_sprite_ext(sprite_index,image_index,round(x),round(y),image_xscale,image_yscale,image_angle,make_colour_hsv(18,255,255),0.85);
+};
+//draw_sprite_ext(sprite_index,image_index,round(x),round(y),image_xscale,image_yscale,image_angle,image_blend,flash_state);
 depth = -y;
 
 if(player_state == "state_carry"){

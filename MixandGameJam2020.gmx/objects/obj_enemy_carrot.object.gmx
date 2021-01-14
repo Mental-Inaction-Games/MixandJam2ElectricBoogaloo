@@ -235,6 +235,13 @@ if(carrot_state == "state_aim"){
     };
     
     draw_sprite_ext(spr_carrot_aim,aim_counter,x+8+lengthdir_x(12,aim_dir),y-8+lengthdir_y(12,aim_dir),image_xscale,image_yscale,aim_dir+90,image_blend,image_alpha)
+    for(a = 1;a &lt; 20;a++){
+        if!(place_meeting(x+8+lengthdir_x(12+(12*a),aim_dir),y-8+lengthdir_y(12+(12*a),aim_dir),obj_solid)){
+            draw_sprite_ext(spr_carrot_aim,3,x+8+lengthdir_x(12+(12*a),aim_dir),y-8+lengthdir_y(12+(12*a),aim_dir),image_xscale,image_yscale,aim_dir+90,image_blend,image_alpha)
+        }else{
+            a = 20;
+        };
+    };
 };
 
 

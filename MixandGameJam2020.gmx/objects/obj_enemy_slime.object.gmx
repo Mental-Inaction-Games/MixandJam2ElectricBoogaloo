@@ -133,8 +133,8 @@ can_move = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(x+2,y,obj_fx_dust);
-instance_create(x+14,y,obj_fx_dust);
+            <string>//instance_create(x+8,y,obj_fx_dust);
+//instance_create(x+14,y,obj_fx_dust);
 </string>
           </argument>
         </arguments>
