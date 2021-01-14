@@ -141,8 +141,8 @@ if!(is_laying_egg){
           <argument>
             <kind>1</kind>
             <string>if(sprite_index == spr_chicken){
-    instance_create(x+2,y,obj_fx_dust);
-    instance_create(x+14,y,obj_fx_dust);
+    //instance_create(x+8,y,obj_fx_dust);
+    //instance_create(x+14,y,obj_fx_dust);
     
     if(lay_counter &gt; 0){
         lay_counter--;

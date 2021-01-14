@@ -59,8 +59,8 @@ target_y = 16;
             <string>///Enemy Movement
 if!(willdie){
     if!(is_underground){
-        instance_create(x+2,y,obj_fx_dust_2);
-        instance_create(x+14,y,obj_fx_dust_2);
+        instance_create(x+4,y,obj_fx_dust_2);
+        instance_create(x+12,y,obj_fx_dust_2);
         is_underground = true;
         image_speed = 0.125;
         sprite_index = spr_noodle_1;
@@ -76,8 +76,8 @@ if!(willdie){
     }else{
         x = target_x;
         y = target_y;
-        instance_create(x+2,y,obj_fx_dust_2);
-        instance_create(x+14,y,obj_fx_dust_2);
+        instance_create(x+4,y,obj_fx_dust_2);
+        instance_create(x+12,y,obj_fx_dust_2);
         
         is_underground = false
         image_speed = 0.125;

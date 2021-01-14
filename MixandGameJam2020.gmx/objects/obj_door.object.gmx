@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_solid</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -28,15 +28,34 @@
             <string>///Initialize Door
 
 image_speed = 0.25;
-times_to_feed = 3;
+times_to_feed = 1;
 processed_feed = false;
 door_state = "state_waiting";
 interact_text = "Speak";
+
+level_name = "Test Level: Your First Dish";
+orderup_x = -16;
+orderup_speed = 2;
+orderup_accel = 0.020;
+orderup_has_stopped = false;
 
 ingredient_one = spr_tomato_drop;
 ingredient_two = spr_carrot_drop;
 desired_food = spr_cooked_salad;
 food_given = spr_cooked_mistake;
+
+order_alpha = 0;
+
+desire_option_1 = spr_cooked_braised_carrot;
+desire_option_2 = spr_cooked_spaghetti;
+desire_option_3 = spr_cooked_salad;
+desire_option_4 = spr_cooked_ramen;
+desire_option_5 = spr_cooked_glaized_ham;
+desire_option_6 = spr_cooked_breakfast;
+/*The door will choose between 6 slots with equal probability. If you don't want one recipe to spawn on a level you've made, use the room creation code
+for this door object to set these to whatever odds you want for the room. Such as putting 3 salads and 3 ramens for a 50/50 chance of either.  Make sure
+any recipes you add have the required enemy in the stage.*/
+            
 </string>
           </argument>
         </arguments>
@@ -65,12 +84,28 @@ food_given = spr_cooked_mistake;
         case "state_waiting":
             interact_text = "Speak";
             if((place_meeting(x,y+24,obj_player_mia))and(keyboard_check_pressed(ord("X")))){
+                door_state = "state_talking";
+            };
+            break;
+            
+        case "state_talking":
+            game_set_pause(true);
+            if(orderup_x &gt; view_wview){
+                game_set_pause(false);
                 with(obj_enemy_spawner){
-                    can_spawn = true;
+                     can_spawn = true;
                 };
                 door_state = "state_hungry";
-                desired_food = choose(spr_cooked_braised_carrot,spr_cooked_spaghetti,spr_cooked_salad,spr_cooked_ramen,spr_cooked_glaized_ham,spr_cooked_breakfast);
+                desired_food = choose(desire_option_1,desire_option_2,desire_option_3,desire_option_4,desire_option_5,desire_option_6);
+                
             };
+            /*
+            with(obj_enemy_spawner){
+                can_spawn = true;
+            };
+            door_state = "state_hungry";
+            desired_food = choose(desire_option_1,desire_option_2,desire_option_3,desire_option_4,desire_option_5,desire_option_6);
+            */
             break;
             
         case "state_hungry":
@@ -126,7 +161,7 @@ food_given = spr_cooked_mistake;
     };
     
     door_state = "state_hungry";  
-    desired_food = choose(spr_cooked_braised_carrot,spr_cooked_spaghetti,spr_cooked_salad,spr_cooked_ramen,spr_cooked_glaized_ham,spr_cooked_breakfast);
+    desired_food = choose(desire_option_1,desire_option_2,desire_option_3,desire_option_4,desire_option_5,desire_option_6);
 };
 </string>
           </argument>
@@ -150,8 +185,33 @@ food_given = spr_cooked_mistake;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(door_state == "state_waiting"){
+            <string>if((door_state == "state_waiting")and(instance_exists(obj_player_mia))){
     draw_sprite(spr_arrow,image_index,x,y-12);
+}else if(door_state == "state_talking"){
+    //draw_set_color(c_black);
+   // draw_set_alpha(0);
+    //draw_rectangle(0,0,view_wview,view_hview,false);
+    draw_set_color(c_white);
+    //draw_set_alpha(1);
+    
+    if!(orderup_has_stopped){
+        if(orderup_speed &gt; 0){
+            orderup_speed -= orderup_accel;
+        }else{
+            orderup_has_stopped = true;
+        };
+    }else{
+        if(orderup_speed &lt; 4){
+            orderup_speed += orderup_accel;
+        };
+        if(orderup_x &gt; view_wview){
+            game_set_pause(false);
+        };
+    };
+    
+    orderup_x += orderup_speed;
+    draw_sprite(spr_hud_orderup,0,orderup_x,80);
+    draw_text(view_wview-orderup_x*2,96,level_name);
 }else if(door_state == "state_hungry"){
     switch(desired_food){
         case spr_cooked_braised_carrot:
@@ -185,10 +245,15 @@ food_given = spr_cooked_mistake;
             break;
     };
 
-    draw_sprite(spr_hud_recipe,0,view_wview-110,8);
-    draw_sprite(ingredient_one,0,view_wview-99,26)
-    draw_sprite(ingredient_two,0,view_wview-78,26)
-    draw_sprite(desired_food,0,view_wview-57,26)
+    if(order_alpha &lt; 1){
+        order_alpha += 0.05;
+    };
+    draw_set_alpha(order_alpha);
+    draw_sprite(spr_hud_recipe,0,x + 18,y - 24);
+    draw_sprite(ingredient_one,0,x + 29,y - 6)
+    draw_sprite(ingredient_two,0,x + 50,y - 6)
+    draw_sprite(desired_food,0,x + 71,y - 6)
+    draw_set_alpha(1);
 };
 </string>
           </argument>
