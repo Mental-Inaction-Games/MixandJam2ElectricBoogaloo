@@ -13,7 +13,7 @@
     <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>168</width>
-  <height>94</height>
+  <width>140</width>
+  <height>120</height>
   <data>images\bg_gameover.png</data>
 </background>
