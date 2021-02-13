@@ -123,12 +123,15 @@
       <sprite>sprites\spr_interact</sprite>
       <sprite>sprites\spr_hud_lifefruit</sprite>
       <sprite>sprites\spr_hud_pot</sprite>
+      <sprite>sprites\spr_hud_pot_stir</sprite>
       <sprite>sprites\spr_hud_minigame</sprite>
       <sprite>sprites\spr_hud_slider</sprite>
       <sprite>sprites\spr_hud_result</sprite>
       <sprite>sprites\spr_hud_recipe</sprite>
       <sprite>sprites\spr_arrow</sprite>
       <sprite>sprites\spr_hud_orderup</sprite>
+      <sprite>sprites\spr_hud_loading</sprite>
+      <sprite>sprites\spr_menu_borders</sprite>
     </sprites>
     <sprites name="Title">
       <sprite>sprites\spr_title</sprite>
@@ -156,6 +159,11 @@
     <script>scripts\game_is_paused.gml</script>
     <script>scripts\game_set_pause.gml</script>
     <script>scripts\scr_get_recipe_result.gml</script>
+    <script>scripts\room_warp_to.gml</script>
+    <script>scripts\scr_menu_close.gml</script>
+    <script>scripts\scr_menu_open.gml</script>
+    <script>scripts\scr_menus_init.gml</script>
+    <script>scripts\scr_draw_text.gml</script>
   </scripts>
   <objects name="objects">
     <objects name="Debug">
@@ -209,12 +217,20 @@
       <object>objects\obj_fx_dust_2</object>
       <object>objects\obj_fx_explosion_egg</object>
       <object>objects\obj_fx_explosion</object>
+      <object>objects\obj_fx_explosion_recipe</object>
+      <object>objects\obj_fx_sparkle_recipe</object>
       <object>objects\obj_fx_spawn_spinner</object>
+      <object>objects\obj_fx_screen_trans</object>
     </objects>
     <objects name="Menus &amp; Title">
       <object>objects\obj_title</object>
       <object>objects\obj_mini_slider</object>
       <object>objects\obj_pressany_fadein</object>
+      <object>objects\obj_menu</object>
+      <object>objects\obj_menu_title</object>
+      <object>objects\obj_menu_help</object>
+      <object>objects\obj_menu_credits</object>
+      <object>objects\obj_menu_gameover</object>
     </objects>
     <object>objects\obj_player_mia</object>
     <object>objects\obj_attack_player</object>

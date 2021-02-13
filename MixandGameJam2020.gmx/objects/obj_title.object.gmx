@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>1</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>self</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>///Initialize Title Screen
-
 image_speed = 0.15;
+key_pressed = false;
 </string>
           </argument>
         </arguments>
@@ -52,12 +52,13 @@ image_speed = 0.15;
             <kind>1</kind>
             <string>///Proceed to Game
 
-if keyboard_check_pressed(vk_anykey)
-   {
-   room_goto(room0);
-   }
+if((keyboard_check_pressed(vk_anykey))and!(key_pressed)){
+   scr_menu_open(obj_menu_title);
+   key_pressed = true;
+   //room_warp_to(room0);
+   //room_goto(room0);
+}
 
-draw_sprite(spr_pressany, 0, x, y+16);
 </string>
           </argument>
         </arguments>
@@ -82,6 +83,13 @@ draw_sprite(spr_pressany, 0, x, y+16);
             <kind>1</kind>
             <string>draw_sprite(spr_title_logo, image_index, 80,20);
 draw_sprite(sprite_index,image_index, 160, 36);
+
+if!(key_pressed){
+    obj_pressany_fadein.visible = true;
+//    draw_sprite(spr_pressany, 0, x, y+16);
+}else{
+    obj_pressany_fadein.visible = false;
+};
 </string>
           </argument>
         </arguments>
