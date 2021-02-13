@@ -30,6 +30,7 @@ debug_active = 0;//self explanatory
 use_fullscreen = false;
 
 pause_alpha = 0;
+scr_menus_init();
 </string>
           </argument>
         </arguments>

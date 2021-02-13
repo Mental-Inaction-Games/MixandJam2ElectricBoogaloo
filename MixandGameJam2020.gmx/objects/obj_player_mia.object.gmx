@@ -37,7 +37,7 @@ face_dir = "down"; //used to keep track of which of the 4 directional sprites th
 attack_timer = 0;
 attack_timer_max = 30;
 
-player_life = 4;
+player_life = 1;
 player_life_max = 4;
 can_take_damage = true;
 hurt_timer = 0;
@@ -54,6 +54,8 @@ draw_shadow = true;
 finish_recipe = false;
 recipe_success = false;
 pot_offset = 0;
+pot_sprite = spr_hud_pot_stir;
+pot_frame = 0;
 result_offset = 16;
 result_alpha = 0;
 close_recipe_timer = 90;
@@ -356,9 +358,12 @@ if!(game_is_paused()){
           <argument>
             <kind>1</kind>
             <string>if(player_state == "state_climb"){
-    player_state  = "state_walk";
+    player_state = "state_walk";
     player_life = player_life_max;
-    room = obj_level_exit.warp_room;
+    room_warp_to(obj_level_exit.warp_room);
+    x = -16;
+    y = -16;
+    //room = obj_level_exit.warp_room;
 };
 </string>
           </argument>
@@ -431,12 +436,12 @@ if(player_state == "state_recipe"){
     draw_set_alpha(1);
     draw_set_color(c_white);
     draw_set_halign(fa_center);
-    draw_text(view_wview/2,64,"Press X to cook at# the right time!")
+    draw_text(view_wview/2,48,"Press X to cook at# the right time!")
     draw_set_halign(fa_left);
     
     //only move the pan and draw results after you've finished the minigame
     if(finish_recipe == true){
-        if(pot_offset &gt; -16){
+        if(pot_offset &gt; -12){
             pot_offset--;
         };
         if(result_offset &gt; 0){
@@ -454,19 +459,22 @@ if(player_state == "state_recipe"){
         if(recipe_success){
             scr_get_recipe_result(recipe_item_1,recipe_item_2);
                 
-            draw_sprite(carry_sprite,0,(view_wview/2)-12,(view_hview/2)+6);
-            draw_text((view_wview/2),(view_hview/2)-2,recipe_success_name);
+            draw_sprite(carry_sprite,0,(view_wview/2)-12,(view_hview/2)-8);
+            draw_text((view_wview/2),(view_hview/2)-16,recipe_success_name);
         }else{
             scr_get_recipe_result(spr_cooked_mistake,spr_cooked_mistake);
                 
-            draw_sprite(carry_sprite,0,(view_wview/2)-12,(view_hview/2)+6);
-            draw_text((view_wview/2),(view_hview/2)-2,recipe_success_name);
+            draw_sprite(carry_sprite,0,(view_wview/2)-12,(view_hview/2)-8);
+            draw_text((view_wview/2),(view_hview/2)-16,recipe_success_name);
         };
         
         //close the recipe minigame after another second has passed
         if(close_recipe_timer &gt; 0){
             close_recipe_timer--;
+            pot_sprite = spr_hud_pot;
+            //pot_frame = 0;
         }else{
+            pot_sprite = spr_hud_pot_stir;
             if(recipe_success){
                 player_state = "state_carry";
             }else{
@@ -479,9 +487,15 @@ if(player_state == "state_recipe"){
             result_offset = 16;
             result_alpha = 0;
             close_recipe_timer = 90;
+            pot_frame = 0;
         };
+        
+       
     };
-    draw_sprite(spr_hud_pot,0,(view_wview/2)+pot_offset,(view_hview/2)+16);
+    
+    pot_frame += 0.1;
+    draw_sprite(pot_sprite,pot_frame,(view_wview/2)+pot_offset,(view_hview/2)+16);
+    draw_text(60,0,pot_frame);
     draw_sprite(spr_hud_minigame,0,view_wview/2,(view_hview/2)+40);  
 
 //draw gui when player is dead
@@ -524,6 +538,7 @@ if(player_state == "state_recipe"){
             sprite_index = spr_player_mia_die_2;
             background_visible[1] = true;
             background_alpha[1] = 0;
+            scr_menu_open(obj_menu_gameover);
         };
     //game over appears with menu
     }else{
@@ -531,7 +546,6 @@ if(player_state == "state_recipe"){
             background_alpha[1] += 0.01;       
         };
         draw_background_ext(bg_gameover,background_x[1],background_y[1],1,1,0,c_white,background_alpha[1]);
-        
     };
 };
 </string>
