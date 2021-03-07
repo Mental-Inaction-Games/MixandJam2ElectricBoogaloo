@@ -54,6 +54,10 @@
     <instance objName="obj_title" x="0" y="0" name="inst_0BE8CC1B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_pressany_fadein" x="128" y="160" name="inst_9D81966F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_door" x="128" y="96" name="inst_66926818" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_fx_waterfall" x="224" y="32" name="inst_D2910092" locked="0" code="" scaleX="1.11000001430511" scaleY="1.00999999046326" colour="4294967295" rotation="0"/>
+    <instance objName="obj_fx_waterfall" x="48" y="32" name="inst_E9A95F00" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_torch" x="48" y="64" name="inst_0ED3F49C" locked="0" code="" scaleX="0.639999985694885" scaleY="0.639999985694885" colour="4294967295" rotation="0"/>
+    <instance objName="obj_torch" x="144" y="64" name="inst_7223C48D" locked="0" code="" scaleX="0.639999985694885" scaleY="0.639999985694885" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="bg_tileset" x="64" y="128" w="16" h="16" xo="1" yo="52" id="10000555" name="inst_F5D0462A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
