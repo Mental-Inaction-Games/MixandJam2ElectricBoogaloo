@@ -146,6 +146,8 @@
       <sprite>sprites\spr_fx_explosion</sprite>
       <sprite>sprites\spr_fx_explosion_egg</sprite>
       <sprite>sprites\spr_fx_sparkle</sprite>
+      <sprite>sprites\spr_fx_waterfall</sprite>
+      <sprite>sprites\spr_torchfire</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -221,6 +223,8 @@
       <object>objects\obj_fx_sparkle_recipe</object>
       <object>objects\obj_fx_spawn_spinner</object>
       <object>objects\obj_fx_screen_trans</object>
+      <object>objects\obj_fx_waterfall</object>
+      <object>objects\obj_torch</object>
     </objects>
     <objects name="Menus &amp; Title">
       <object>objects\obj_title</object>
