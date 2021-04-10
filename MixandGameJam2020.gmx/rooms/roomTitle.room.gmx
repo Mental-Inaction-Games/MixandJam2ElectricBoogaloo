@@ -27,8 +27,8 @@
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>-1</deleteUnderlyingTiles>
     <page>0</page>
-    <xoffset>98</xoffset>
-    <yoffset>236</yoffset>
+    <xoffset>94</xoffset>
+    <yoffset>72</yoffset>
   </makerSettings>
   <backgrounds>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
@@ -54,8 +54,8 @@
     <instance objName="obj_title" x="0" y="0" name="inst_0BE8CC1B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_pressany_fadein" x="128" y="160" name="inst_9D81966F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_door" x="128" y="96" name="inst_66926818" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_fx_waterfall" x="224" y="32" name="inst_D2910092" locked="0" code="" scaleX="1.11000001430511" scaleY="1.00999999046326" colour="4294967295" rotation="0"/>
-    <instance objName="obj_fx_waterfall" x="48" y="32" name="inst_E9A95F00" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_fx_waterfall" x="224" y="40" name="inst_D2910092" locked="0" code="" scaleX="1.11000001430511" scaleY="1.00999999046326" colour="4294967295" rotation="0"/>
+    <instance objName="obj_fx_waterfall" x="48" y="40" name="inst_E9A95F00" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_torch" x="56" y="136" name="inst_0ED3F49C" locked="0" code="" scaleX="0.639999985694885" scaleY="0.639999985694885" colour="4294967295" rotation="0"/>
     <instance objName="obj_torch" x="200" y="136" name="inst_7223C48D" locked="0" code="" scaleX="0.639999985694885" scaleY="0.639999985694885" colour="4294967295" rotation="0"/>
   </instances>
@@ -142,10 +142,6 @@
     <tile bgName="bg_tileset" x="192" y="96" w="16" h="16" xo="18" yo="35" id="10000934" name="inst_F3BCAE90" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_tileset" x="48" y="96" w="16" h="16" xo="35" yo="35" id="10000935" name="inst_66172B04" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_tileset" x="48" y="80" w="16" h="16" xo="35" yo="18" id="10000936" name="inst_165DC4E9" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_tileset" x="32" y="32" w="16" h="16" xo="1" yo="18" id="10000937" name="inst_FE9AA340" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_tileset" x="208" y="32" w="16" h="16" xo="1" yo="18" id="10000938" name="inst_D04AABF6" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_tileset" x="32" y="48" w="16" h="16" xo="1" yo="35" id="10000939" name="inst_C579FF37" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_tileset" x="208" y="48" w="16" h="16" xo="1" yo="35" id="10000940" name="inst_81816BBE" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_tileset" x="0" y="96" w="16" h="16" xo="18" yo="1" id="10000941" name="inst_E7EBA897" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_tileset" x="0" y="112" w="16" h="16" xo="18" yo="1" id="10000942" name="inst_1B091520" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_tileset" x="0" y="128" w="16" h="16" xo="18" yo="1" id="10000943" name="inst_13F31406" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -252,6 +248,10 @@
     <tile bgName="bg_tileset" x="192" y="128" w="16" h="16" xo="18" yo="69" id="10001172" name="inst_B7DB286A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_tileset" x="176" y="112" w="16" h="16" xo="35" yo="69" id="10001173" name="inst_01D5D631" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_tileset" x="64" y="112" w="16" h="16" xo="35" yo="69" id="10001174" name="inst_3A2B0CC3" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_tileset" x="32" y="32" w="16" h="16" xo="103" yo="52" id="10001175" name="inst_A490C993" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_tileset" x="208" y="32" w="16" h="16" xo="103" yo="52" id="10001176" name="inst_0979573E" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_tileset" x="32" y="48" w="16" h="16" xo="103" yo="69" id="10001177" name="inst_D367C4BA" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_tileset" x="208" y="48" w="16" h="16" xo="103" yo="69" id="10001178" name="inst_1DF08F14" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
   </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
